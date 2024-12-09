@@ -1,0 +1,14 @@
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\bin\Debug\net9.0\F1Sim.exe
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\bin\Debug\net9.0\F1Sim.deps.json
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\bin\Debug\net9.0\F1Sim.runtimeconfig.json
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\bin\Debug\net9.0\F1Sim.dll
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\bin\Debug\net9.0\F1Sim.pdb
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.AssemblyInfoInputs.cache
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.AssemblyInfo.cs
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.csproj.CoreCompileInputs.cache
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.dll
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\refint\F1Sim.dll
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.pdb
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.genruntimeconfig.cache
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\ref\F1Sim.dll
