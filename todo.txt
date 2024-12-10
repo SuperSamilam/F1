@@ -3,5 +3,7 @@ Sponsors
 Marketer(Person) - varibels ideas, crisis management
 Media tranning
 Merch
+Mechanics - Fix the cars broken parts, 
+Car - rear wing durabilty, front wing durabilty, sidepos durabilty, suspension durabilty, floor durabilyy
 
 Fråga micke när han tycker en klass är onödig? (Logisticsfaccilty)
