@@ -73,7 +73,7 @@ namespace PersonSpace
                 age = rand.Next(17, 26);
                 salary = 500000;
                 if (rand.Next(0, 10) == 0)
-                    devlopment = rand.Next(85, 99);
+                    devlopment = rand.Next(89, 99);
                 else
                     devlopment = rand.Next(75, 90);
             }
@@ -101,12 +101,12 @@ namespace PersonSpace
             double minExpected = expexctedRating - 0.1;
             double maxExpected = expexctedRating + 0.1;
 
-            double reactionTime = minExpected + (rand.NextDouble() * (maxExpected-minExpected));
-            double cornerSkill = minExpected + (rand.NextDouble() * (maxExpected-minExpected));;
-            double defense = minExpected + (rand.NextDouble() * (maxExpected-minExpected));
-            double overtake = minExpected + (rand.NextDouble() * (maxExpected-minExpected));
-            double awerness = expexctedRating*5 - reactionTime - cornerSkill - defense - overtake;
-        
+            double reactionTime = minExpected + (rand.NextDouble() * (maxExpected - minExpected));
+            double cornerSkill = minExpected + (rand.NextDouble() * (maxExpected - minExpected)); ;
+            double defense = minExpected + (rand.NextDouble() * (maxExpected - minExpected));
+            double overtake = minExpected + (rand.NextDouble() * (maxExpected - minExpected));
+            double awerness = expexctedRating * 5 - reactionTime - cornerSkill - defense - overtake;
+
             reactionTime = reactionTime * 3;
             Driver driver = new Driver(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, reactionTime, cornerSkill, defense, overtake, awerness, devlopment);
             driver.CalcualteRating();
@@ -128,18 +128,62 @@ namespace PersonSpace
         {
             this.staffExperince = staffExperince;
         }
+
+        public static Dictionary<StaffExperince, double> staffExerinceBoost = new Dictionary<StaffExperince, double>()
+        {
+            {StaffExperince.Junior, 1},
+            {StaffExperince.Mid, 1.1},
+            {StaffExperince.Senior, 1.3}
+        };
     }
 
     public enum StaffExperince { Junior, Mid, Senior }
 
     public class Enginner : Staff
     {
-        public int devlopmentSpeed;
-        public int creativty;
+        public int devlopmentSpeed; //0-100
 
-        public Enginner(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince)
+        //Should be hidden from the player??
+        public double creativty; //0-100
+
+        public Enginner(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopmentSpeed, double creativty) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince)
         {
+            this.devlopmentSpeed = devlopmentSpeed;
+            this.creativty = creativty;
+        }
 
+        public static Enginner CreateNewEnginner(StaffExperince staffExperince, List<Country> countries)
+        {
+            Random rand = new Random();
+            Role role = Role.Enginner;
+            double creativty = rand.NextDouble(); //Just luck
+            int ageOfRetirement = 60;
+            string nationality = countries[rand.Next(0, countries.Count)].name;
+
+            //Depending on staffexernxe
+            int age;
+            int devlopmentSpeed;
+            int salary;
+            if (staffExperince == StaffExperince.Junior)
+            {
+                age = rand.Next(20, 30);
+                devlopmentSpeed = rand.Next(30,60);
+                salary = 30000;
+            }
+            else if (staffExperince == StaffExperince.Mid)
+            {
+                age = rand.Next(30, 40);
+                devlopmentSpeed = rand.Next(60,75);
+                salary = 45000;
+            }
+            else
+            {
+                age = rand.Next(40, 55);
+                devlopmentSpeed = rand.Next(75,90);
+                salary = 70000;
+            }
+
+            return new Enginner(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopmentSpeed, creativty);
         }
     }
 

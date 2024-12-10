@@ -1,0 +1,15 @@
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\bin\Debug\net8.0\F1Sim.exe
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\bin\Debug\net8.0\F1Sim.deps.json
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\bin\Debug\net8.0\F1Sim.runtimeconfig.json
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\bin\Debug\net8.0\F1Sim.dll
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\bin\Debug\net8.0\F1Sim.pdb
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.AssemblyInfoInputs.cache
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.AssemblyInfo.cs
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.csproj.CoreCompileInputs.cache
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.sourcelink.json
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.dll
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\refint\F1Sim.dll
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.pdb
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\F1Sim.genruntimeconfig.cache
+C:\Users\sam.lindfors\Documents\GitHub\FormulaManager\F1\F1Sim\obj\Debug\net8.0\ref\F1Sim.dll
