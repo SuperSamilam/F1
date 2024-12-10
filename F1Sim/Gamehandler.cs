@@ -24,6 +24,8 @@ public class GameHandler
             Console.WriteLine("1: Look at world");
             Console.WriteLine("2: Driver market");
 
+            Console.WriteLine("6: TOGGLE AUTOSAVE " + data.autosave);
+
             string input = Console.ReadLine() ?? "";
             if (input == "1")
             {
@@ -32,6 +34,10 @@ public class GameHandler
             else if (input == "2")
             {
                 DriverMarket();
+            }
+            else if (input == "6")
+            {
+                data.autosave = !data.autosave;
             }
             //Advance to next race
             //Car - make new parts, reserach for next season
@@ -75,7 +81,7 @@ public class GameHandler
 
         for (int i = 0; i < data.drivers.Count; i++)
         {
-            Console.WriteLine(i + ": " + data.drivers[i].name + " Rating: " + data.drivers[i].rating + " Devlopment: " + data.drivers[i].devlopment + " Nationality: " + data.drivers[i].nationality );
+            Console.WriteLine(i + ": " + data.drivers[i].name + " Rating: " + data.drivers[i].rating + " Devlopment: " + data.drivers[i].devlopment + " Nationality: " + data.drivers[i].nationality);
         }
 
         InputHelper.WaitForInputThenContinue();

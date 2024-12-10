@@ -2,8 +2,8 @@ namespace TrackSpace
 {
     public class Track
     {
-        public string name;
-        List<TrackPart> track;
+        public string name { get; set; }
+        public List<TrackPart> track { get; set; }
 
         public Track(string name)
         {
@@ -32,10 +32,10 @@ namespace TrackSpace
 
     }
 
-    class TrackPart
+    public class TrackPart
     {
-        bool isCurve = false; //If false it means stragiht
-        double value;
+        public bool isCurve { get; set; } //If false it means stragiht
+        public double value { get; set; }
 
         public TrackPart(bool isCurve, double value)
         {

@@ -12,3 +12,4 @@ C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\refint\F1Sim.dl
 C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.pdb
 C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.genruntimeconfig.cache
 C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\ref\F1Sim.dll
+C:\Users\lindf\OneDrive\Skrivbord\Prog\F1\F1Sim\obj\Debug\net9.0\F1Sim.sourcelink.json

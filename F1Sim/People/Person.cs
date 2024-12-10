@@ -6,16 +6,17 @@ namespace PersonSpace
 {
     public class Person
     {
-        public string name;
-        public Role role;
-        public int age;
-        public string nationality;
-        public int ageOfRetirement;
-        public int salary;
-        public double teamCompatibilty;
-        public int loyality;
-
-        public Person(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality)
+        public string name { get; set; }
+        public Role role { get; set; }
+        public int age { get; set; }
+        public string nationality { get; set; }
+        public int ageOfRetirement { get; set; }
+        public int salary { get; set; }
+        public double teamCompatibilty { get; set; }
+        public int loyality { get; set; }
+        public int rating { get; set; }
+        public int devlopment { get; set; } //0-1
+        public Person(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, int devlopment) 
         {
             Random rand = new Random();
             string[] firstnames = File.ReadAllLines(@"firstnames.txt");
@@ -29,27 +30,25 @@ namespace PersonSpace
             this.salary = salary;
             this.teamCompatibilty = teamCompatibilty;
             this.loyality = loyality;
+            this.devlopment = devlopment;
         }
     }
 
     public class Driver : Person
     {
-        public int rating;
-        public double reactionTime; //in sec
-        public double cornerSkill; //0-1
-        public double defense; //0-1
-        public double overtake; //0-1
-        public double awerness; //0-1
-        public int devlopment; //0-1
+        public double reactionTime { get; set; } //in sec
+        public double cornerSkill { get; set; } //0-1
+        public double defense { get; set; } //0-1
+        public double overtake { get; set; } //0-1
+        public double awerness { get; set; } //0-1
 
-        public Driver(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, double reactionTime, double cornerSkill, double defense, double overtake, double awerness, int devlopment) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality)
+        public Driver(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, double reactionTime, double cornerSkill, double defense, double overtake, double awerness, int devlopment) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, devlopment)
         {
             this.reactionTime = reactionTime;
             this.cornerSkill = cornerSkill;
             this.defense = defense;
             this.overtake = overtake;
             this.awerness = awerness;
-            this.devlopment = devlopment;
         }
 
         //Rookie --75, Mid 76 - 80, Seasond 81-85, Experinced 86+
@@ -122,9 +121,9 @@ namespace PersonSpace
 
     public class Staff : Person
     {
-        StaffExperince staffExperince; //Gets deterimed by stats from all indivdual varabels
+        public StaffExperince staffExperince { get; set; } //Gets deterimed by stats from all indivdual varabels
 
-        public Staff(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality)
+        public Staff(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopment) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, devlopment)
         {
             this.staffExperince = staffExperince;
         }
@@ -141,12 +140,12 @@ namespace PersonSpace
 
     public class Enginner : Staff
     {
-        public int devlopmentSpeed; //0-100
+        public int devlopmentSpeed { get; set; } //0-100
 
         //Should be hidden from the player??
-        public double creativty; //0-100
+        public double creativty { get; set; } //0-100
 
-        public Enginner(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopmentSpeed, double creativty) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince)
+        public Enginner(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopment, int devlopmentSpeed, double creativty) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince, devlopment)
         {
             this.devlopmentSpeed = devlopmentSpeed;
             this.creativty = creativty;
@@ -164,49 +163,195 @@ namespace PersonSpace
             int age;
             int devlopmentSpeed;
             int salary;
+            int devlopment;
             if (staffExperince == StaffExperince.Junior)
             {
                 age = rand.Next(20, 30);
-                devlopmentSpeed = rand.Next(30,60);
+                devlopmentSpeed = rand.Next(30, 60);
                 salary = 30000;
+                devlopment = rand.Next(80, 90);
             }
             else if (staffExperince == StaffExperince.Mid)
             {
                 age = rand.Next(30, 40);
-                devlopmentSpeed = rand.Next(60,75);
+                devlopmentSpeed = rand.Next(60, 75);
                 salary = 45000;
+                devlopment = rand.Next(70, 80);
             }
             else
             {
                 age = rand.Next(40, 55);
-                devlopmentSpeed = rand.Next(75,90);
+                devlopmentSpeed = rand.Next(75, 90);
                 salary = 70000;
+                devlopment = rand.Next(55, 70);
             }
 
-            return new Enginner(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopmentSpeed, creativty);
+            Enginner enginner = new Enginner(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopment, devlopmentSpeed, creativty);
+            enginner.CalcualteRating();
+            return enginner;
         }
+
+        void CalcualteRating()
+        {
+            //Devlopmentspeed + creatvity
+
+            rating = (int)((devlopmentSpeed + creativty) / (double)2);
+            if (staffExperince == StaffExperince.Junior)
+                rating -= 2;
+            if (staffExperince == StaffExperince.Senior)
+                rating += 1;
+        }
+
     }
 
     public class Pitcrew : Staff
     {
-        public double tireChangeSpeed;
-        public double wingChangeSpeed;
+        public double tireChangeSpeed { get; set; } //1-2.5
+        public double wingChangeSpeed { get; set; } //3-6
+        public double faultChance { get; set; }
 
-        public Pitcrew(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, double tireChangeSpeed, double wingChangeSpeed) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince)
+        public Pitcrew(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopment,  double tireChangeSpeed, double wingChangeSpeed, double faultChance) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince, devlopment)
         {
             this.tireChangeSpeed = tireChangeSpeed;
             this.wingChangeSpeed = wingChangeSpeed;
+            this.faultChance = faultChance;
+        }
+
+        public static Pitcrew CreateNewPitcrew(StaffExperince staffExperince, List<Country> countries)
+        {
+            Random rand = new Random();
+            Role role = Role.PitCrew;
+            int ageOfRetirement = 42;
+            string nationality = countries[rand.Next(0, countries.Count)].name;
+
+            //Depending on staffexernxe
+            int age;
+            int salary;
+
+            double tireChangeSpeed;
+            double wingChangeSpeed;
+            double faultChance;
+            int devlopment;
+            if (staffExperince == StaffExperince.Junior)
+            {
+                age = rand.Next(20, 25);
+                salary = 20000;
+                devlopment = rand.Next(80, 90);
+
+                tireChangeSpeed = 2.15 + (rand.NextDouble() * (2.5 - 2.15));
+                wingChangeSpeed = 5 + (rand.NextDouble() * (5 - 6));
+                faultChance = 0.2;
+            }
+            else if (staffExperince == StaffExperince.Mid)
+            {
+                age = rand.Next(25, 30);
+                salary = 40000;
+                devlopment = rand.Next(75, 80);
+
+                tireChangeSpeed = 1.9 + (rand.NextDouble() * (2.2 - 1.9));
+                wingChangeSpeed = 4 + (rand.NextDouble() * (4 - 5));
+                faultChance = 0.1;
+            }
+            else
+            {
+                age = rand.Next(30, 40);
+                salary = 60000;
+                devlopment = rand.Next(55, 70);
+
+                tireChangeSpeed = 1.75 + (rand.NextDouble() * (2 - 1.75));
+                wingChangeSpeed = 3 + (rand.NextDouble() * (3 - 4));
+                faultChance = 0.04;
+            }
+
+            Pitcrew pitcrew = new Pitcrew(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopment ,tireChangeSpeed, wingChangeSpeed, faultChance);
+            pitcrew.CalcualteRating();
+            return pitcrew;
+        }
+
+        void CalcualteRating()
+        {
+            //Devlopmentspeed + creatvity
+
+            rating = (int)((tireChangeSpeed / 3 + wingChangeSpeed / 6 + (1 - faultChance)) / (double)3);
+            if (staffExperince == StaffExperince.Junior)
+                rating -= 2;
+            if (staffExperince == StaffExperince.Senior)
+                rating += 1;
         }
     }
 
     public class TeamPrincipal : Staff
     {
-        public int leadershipSkill;
-        public double budgetingSkill;
+        public double leadershipSkill { get; set; }
+        public double budgetingSkill { get; set; }
 
-        public TeamPrincipal(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince)
+        public double hiringSkill { get; set; }
+
+        public TeamPrincipal(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopment,  double leadershipSkill, double budgetingSkill, double hiringSkill) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince, devlopment)
         {
+            this.leadershipSkill = leadershipSkill;
+            this.budgetingSkill = budgetingSkill;
+            this.hiringSkill = hiringSkill;
+        }
 
+        public static TeamPrincipal CreateNewTeamPrincipal(StaffExperince staffExperince, List<Country> countries)
+        {
+            Random rand = new Random();
+            Role role = Role.PitCrew;
+            int ageOfRetirement = 55;
+            string nationality = countries[rand.Next(0, countries.Count)].name;
+
+            //Depending on staffexernxe
+            int age;
+            int salary;
+            int devlopment;
+
+            double leadershipSkill;
+            double budgetingSkill;
+            double hiringSkill;
+            if (staffExperince == StaffExperince.Junior)
+            {
+                age = rand.Next(20, 25);
+                salary = 100000;
+                devlopment = rand.Next(80, 90);
+
+                leadershipSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+                budgetingSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+                hiringSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+            else if (staffExperince == StaffExperince.Mid)
+            {
+                age = rand.Next(25, 30);
+                salary = 400000;
+                devlopment = rand.Next(70, 80);
+
+                leadershipSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                budgetingSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                hiringSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+            else
+            {
+                age = rand.Next(30, 40);
+                salary = 1000000;
+                devlopment = rand.Next(55, 70);
+
+                leadershipSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                budgetingSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                hiringSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+
+            TeamPrincipal principal = new TeamPrincipal(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopment, leadershipSkill, budgetingSkill, hiringSkill);
+            principal.CalcualteRating();
+            return principal;
+        }
+
+        void CalcualteRating()
+        {
+            rating = (int)((leadershipSkill + budgetingSkill + hiringSkill) / (double)3);
+            if (staffExperince == StaffExperince.Junior)
+                rating -= 2;
+            if (staffExperince == StaffExperince.Senior)
+                rating += 1;
         }
     }
 

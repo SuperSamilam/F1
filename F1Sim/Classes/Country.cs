@@ -4,9 +4,9 @@ namespace CountrySpace
 {
     public class Country
     {
-        public string name;
-        public List<Track> tracks;
-        public List<string> countryLocations;
+        public string name { get; set; }
+        public List<Track> tracks { get; set; }
+        public List<string> countryLocations { get; set; }
 
         public Country(string name, List<string> countryLocations)
         {

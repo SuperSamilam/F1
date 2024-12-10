@@ -19,19 +19,26 @@ public class GameData
     //List of enginner market
     //List of pit crew market
 
-    public List<Driver> drivers = new List<Driver>();
+    public List<Driver> drivers { get; set; }
+    public List<Enginner> enginners { get; set; } //Each Team can max have 10 enginners
+    public List<Pitcrew> pitCrews { get; set; } //Each Team needs 14 pit crew
+    public List<TeamPrincipal> teamPrincipals { get; set; } //Each Team can max have 10 enginners
+
 
     public List<Season> seasons = new List<Season>();
-    public List<Country> countries = new List<Country>();
+    public List<Country> countries { get; set; }
+
+    public bool autosave { get; set; }
 
     public GameData(string saveName)
     {
         Random rand = new Random();
         this.saveName = saveName;
+        autosave = true;
 
         //Generate Counties and tracks for thoose countries
         #region Counties
-
+        countries = new List<Country>();
         countries.Add(new Country("Afganistan", new List<string>() { "Kabul" }));
         countries.Add(new Country("Albania", new List<string>() { "Tirane" }));
         countries.Add(new Country("Argentina", new List<string>() { "Buens Aires", "Cordoba" }));
@@ -99,6 +106,7 @@ public class GameData
 
         #region Drivers
 
+        drivers = new List<Driver>();
         //Rookie drivers
         for (int i = 0; i < 10; i++)
         {
@@ -127,8 +135,79 @@ public class GameData
             drivers.Add(driver);
         }
 
+        #endregion
+
+        #region Enginners
+
+        enginners = new List<Enginner>();
+        for (int i = 0; i < 8; i++)
+        {
+            Enginner enginner = Enginner.CreateNewEnginner(StaffExperince.Junior, countries);
+            enginners.Add(enginner);
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            Enginner enginner = Enginner.CreateNewEnginner(StaffExperince.Mid, countries);
+            enginners.Add(enginner);
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            Enginner enginner = Enginner.CreateNewEnginner(StaffExperince.Senior, countries);
+            enginners.Add(enginner);
+        }
+
 
         #endregion
+
+        #region PitCrew
+
+        pitCrews = new List<Pitcrew>();
+        for (int i = 0; i < 12; i++)
+        {
+            Pitcrew pitcrew = Pitcrew.CreateNewPitcrew(StaffExperince.Junior, countries);
+            pitCrews.Add(pitcrew);
+        }
+
+        for (int i = 0; i < 12; i++)
+        {
+            Pitcrew pitcrew = Pitcrew.CreateNewPitcrew(StaffExperince.Mid, countries);
+            pitCrews.Add(pitcrew);
+        }
+
+        for (int i = 0; i < 12; i++)
+        {
+            Pitcrew pitcrew = Pitcrew.CreateNewPitcrew(StaffExperince.Senior, countries);
+            pitCrews.Add(pitcrew);
+        }
+
+        #endregion
+
+        #region TeamPrincipals
+
+        teamPrincipals = new List<TeamPrincipal>();
+        for (int i = 0; i < 3; i++)
+        {
+            TeamPrincipal teamprincipal = TeamPrincipal.CreateNewTeamPrincipal(StaffExperince.Junior, countries);
+            teamPrincipals.Add(teamprincipal);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            TeamPrincipal teamprincipal = TeamPrincipal.CreateNewTeamPrincipal(StaffExperince.Mid, countries);
+            teamPrincipals.Add(teamprincipal);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            TeamPrincipal teamprincipal = TeamPrincipal.CreateNewTeamPrincipal(StaffExperince.Senior, countries);
+            teamPrincipals.Add(teamprincipal);
+        }
+
+        #endregion
+        
+    
     }
 }
 

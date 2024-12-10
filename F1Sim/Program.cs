@@ -1,14 +1,17 @@
 ﻿using SaveSystemSpace;
 using InputHelperSpace;
 
-GameData data;
+GameData data = null;
 GameHandler gamehandler;
+
 
 //Allow for save files to be saved at one persitant place
 if (!Directory.Exists(SaveSystem.gamePath))
 {
     Directory.CreateDirectory(SaveSystem.gamePath);
 }
+AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+
 
 //Main Menu
 while (true)
@@ -62,4 +65,16 @@ while (true)
         InputHelper.WaitForInputThenContinue();
     }
 
+
+}
+
+void OnProcessExit(object? sender, EventArgs e)
+{
+    Console.WriteLine("IN HERE");
+    if (data != null)
+        if (data.autosave)
+        {
+            SaveSystem.WriteData(data);
+            Console.WriteLine("WROTE");
+        }
 }
