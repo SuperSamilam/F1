@@ -1,6 +1,8 @@
 using PersonSpace;
 using CarSpace;
 using System.ComponentModel.Design;
+using Facility;
+using System.Dynamic;
 
 namespace TeamSpace
 {
@@ -8,20 +10,18 @@ namespace TeamSpace
     {
         //Emplooyes
         public TeamPrincipal teamPrincipal { get; set; }
-        public List<Enginner> enginner { get; set; }
-        public List<Enginner> pitcrew { get; set; }
-
         public Driver driver1 { get; set; }
         public Driver driver2 { get; set; }
 
         public Car car1 { get; set; }
         public Car car2 { get; set; }
 
-        //Affiliets
-        List<Driver> affilets {get; set;}
-
         //Facciltys
-        
+        public ReseachNDevkiopnentFacility rndFaccilty {get; set;}
+        public DriverFacility driverFacility {get; set;}
+        public PitCrewTranningFacility pitFacility {get; set;}
+        public MarketingFacility marketingFacility {get; set;}
+        public WindTunnel windTunnel {get; set;}
         
         //Sponsors
         

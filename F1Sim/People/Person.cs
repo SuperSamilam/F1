@@ -355,6 +355,80 @@ namespace PersonSpace
         }
     }
 
-    public enum Role { Driver, Enginner, TeamPrincipal, PitCrew }
+    public class Marketer : Staff
+    {
+        public double fanEngagementSkill { get; set; }
+        public double sponsorshipNegotioationSkill { get; set; }
+        public double mediaTranningSkill { get; set; }
+
+        public Marketer(Role role, int age, string nationality, int ageOfRetirement, int salary, double teamCompatibilty, int loyality, StaffExperince staffExperince, int devlopment,  double fanEngagementSkill, double sponsorshipNegotioationSkill, double mediaTranningSkill) : base(role, age, nationality, ageOfRetirement, salary, teamCompatibilty, loyality, staffExperince, devlopment)
+        {
+            this.fanEngagementSkill = fanEngagementSkill;
+            this.sponsorshipNegotioationSkill = sponsorshipNegotioationSkill;
+            this.mediaTranningSkill = mediaTranningSkill;
+        }
+
+        public static Marketer CreateNewTeamMarketer(StaffExperince staffExperince, List<Country> countries)
+        {
+            Random rand = new Random();
+            Role role = Role.PitCrew;
+            int ageOfRetirement = 55;
+            string nationality = countries[rand.Next(0, countries.Count)].name;
+
+            //Depending on staffexernxe
+            int age;
+            int salary;
+            int devlopment;
+
+            double fanEngagementSkill;
+            double sponsorshipNegotioationSkill;
+            double mediaTranningSkill;
+            if (staffExperince == StaffExperince.Junior)
+            {
+                age = rand.Next(20, 25);
+                salary = 100000;
+                devlopment = rand.Next(80, 90);
+
+                fanEngagementSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+                sponsorshipNegotioationSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+                mediaTranningSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+            else if (staffExperince == StaffExperince.Mid)
+            {
+                age = rand.Next(25, 30);
+                salary = 400000;
+                devlopment = rand.Next(70, 80);
+
+                fanEngagementSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                sponsorshipNegotioationSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                mediaTranningSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+            else
+            {
+                age = rand.Next(30, 40);
+                salary = 1000000;
+                devlopment = rand.Next(55, 70);
+
+                fanEngagementSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                sponsorshipNegotioationSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
+                mediaTranningSkill = 0.5 + (rand.NextDouble() * (0.6 - 0.5));
+            }
+
+            Marketer marketer = new Marketer(role, age, nationality, ageOfRetirement, salary, 0.5, 0, staffExperince, devlopment, fanEngagementSkill, sponsorshipNegotioationSkill, mediaTranningSkill);
+            marketer.CalcualteRating();
+            return marketer;
+        }
+
+        void CalcualteRating()
+        {
+            rating = (int)((sponsorshipNegotioationSkill + fanEngagementSkill + mediaTranningSkill) / (double)3);
+            if (staffExperince == StaffExperince.Junior)
+                rating -= 2;
+            if (staffExperince == StaffExperince.Senior)
+                rating += 1;
+        }
+    }
+
+    public enum Role { Driver, Enginner, TeamPrincipal, PitCrew, Marketer }
 }
 

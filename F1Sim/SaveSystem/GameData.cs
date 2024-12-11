@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using CountrySpace;
 using PersonSpace;
 using SeasonSpace;
+using SponsorSpace;
 using TrackSpace;
 
 public class GameData
@@ -24,6 +25,7 @@ public class GameData
     public List<Pitcrew> pitCrews { get; set; } //Each Team needs 14 pit crew
     public List<TeamPrincipal> teamPrincipals { get; set; } //Each Team can max have 10 enginners
 
+    public List<Sponsor> sponsors {get; set;}
 
     public List<Season> seasons = new List<Season>();
     public List<Country> countries { get; set; }
@@ -207,7 +209,122 @@ public class GameData
 
         #endregion
         
-    
+        #region Sponsor 
+
+        //100 = 1 million
+        //1000 = 10 million
+        //10000 = 100 million
+        //Cap rith now at 5000 50 million
+        sponsors.Add(new Sponsor("Walmart", CompanyType.Retail, 3000));
+        sponsors.Add(new Sponsor("Amazon", CompanyType.Retail, 5000));
+        sponsors.Add(new Sponsor("Costo", CompanyType.Retail, 1000));
+        sponsors.Add(new Sponsor("Ikea", CompanyType.Retail, 1300));
+        sponsors.Add(new Sponsor("Dollar Store", CompanyType.Retail, 200));
+        sponsors.Add(new Sponsor("Target", CompanyType.Retail, 800));
+
+        sponsors.Add(new Sponsor("Aramco", CompanyType.OilNGas, 6000));
+        sponsors.Add(new Sponsor("Shell", CompanyType.OilNGas, 4000));
+        sponsors.Add(new Sponsor("BP", CompanyType.OilNGas, 4000));
+        sponsors.Add(new Sponsor("Petronas", CompanyType.OilNGas, 6000));
+
+        sponsors.Add(new Sponsor("Louis Vitton", CompanyType.Clothes, 800));
+        sponsors.Add(new Sponsor("Nike", CompanyType.Clothes, 2100));
+        sponsors.Add(new Sponsor("Chanel", CompanyType.Clothes, 500));
+        sponsors.Add(new Sponsor("Adidas", CompanyType.Clothes, 2300));
+        sponsors.Add(new Sponsor("HM", CompanyType.Clothes, 2800));
+        sponsors.Add(new Sponsor("Lacoste", CompanyType.Clothes, 400));
+        sponsors.Add(new Sponsor("Gucci", CompanyType.Clothes, 450));
+        sponsors.Add(new Sponsor("Ralph Loren", CompanyType.Clothes, 500));
+        sponsors.Add(new Sponsor("Tommy Hiliger", CompanyType.Clothes, 450));
+        sponsors.Add(new Sponsor("Zara", CompanyType.Clothes, 340));
+        sponsors.Add(new Sponsor("Puma", CompanyType.Clothes, 600));
+
+        sponsors.Add(new Sponsor("Apple", CompanyType.Mobile, 6500));
+        sponsors.Add(new Sponsor("Samsung", CompanyType.Mobile, 5500));
+        sponsors.Add(new Sponsor("Huawie", CompanyType.Mobile, 3000));
+        
+        sponsors.Add(new Sponsor("Intel", CompanyType.ComputerParts, 2800));
+        sponsors.Add(new Sponsor("Nvidia", CompanyType.ComputerParts, 4000));
+        sponsors.Add(new Sponsor("AMD", CompanyType.ComputerParts, 2700));
+
+        sponsors.Add(new Sponsor("Nintendo", CompanyType.VideoGames, 1000));
+        sponsors.Add(new Sponsor("EA", CompanyType.VideoGames, 1600));
+        sponsors.Add(new Sponsor("Epic Games", CompanyType.VideoGames, 1000));
+        sponsors.Add(new Sponsor("Blizzard", CompanyType.VideoGames, 400));
+        sponsors.Add(new Sponsor("Roblox", CompanyType.VideoGames, 900));
+        sponsors.Add(new Sponsor("Ubisoft", CompanyType.VideoGames, 700));
+        sponsors.Add(new Sponsor("Steam", CompanyType.VideoGames, 1900));
+        sponsors.Add(new Sponsor("Insomiac", CompanyType.VideoGames, 300));
+        sponsors.Add(new Sponsor("Riot", CompanyType.VideoGames, 400));
+
+        sponsors.Add(new Sponsor("Twitch", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Universal", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Netflix", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Viaplay", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Youtube", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Tik Tok", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Paramont", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Warner Bros", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Dream Works", CompanyType.VideoFilm, 100));
+        sponsors.Add(new Sponsor("Spotify", CompanyType.VideoFilm, 100));
+
+        sponsors.Add(new Sponsor("Snapchat", CompanyType.SocialMedia, 100));
+        sponsors.Add(new Sponsor("Facebook", CompanyType.SocialMedia, 100));
+        sponsors.Add(new Sponsor("Instagram", CompanyType.SocialMedia, 100));
+        sponsors.Add(new Sponsor("Discord", CompanyType.SocialMedia, 100));
+        sponsors.Add(new Sponsor("Reedit", CompanyType.SocialMedia, 100));
+        sponsors.Add(new Sponsor("Twitter", CompanyType.SocialMedia, 100));
+
+        sponsors.Add(new Sponsor("Microsoft", CompanyType.ComputerParts, 100));
+        sponsors.Add(new Sponsor("Dell", CompanyType.Mobile, 100));
+        sponsors.Add(new Sponsor("LG", CompanyType.Mobile, 100));
+
+        sponsors.Add(new Sponsor("Lego", CompanyType.Toys, 100));
+        sponsors.Add(new Sponsor("Hot Wheels", CompanyType.Toys, 100));
+        sponsors.Add(new Sponsor("Hasbro", CompanyType.Toys, 100));
+        sponsors.Add(new Sponsor("Nerf", CompanyType.Toys, 100));
+        sponsors.Add(new Sponsor("Barbie", CompanyType.Toys, 100));
+
+        sponsors.Add(new Sponsor("Airbus", CompanyType.Planes, 100));
+        sponsors.Add(new Sponsor("Boing", CompanyType.Planes, 100));
+        sponsors.Add(new Sponsor("SpaceX", CompanyType.Planes, 100));
+
+        sponsors.Add(new Sponsor("McDonalds", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("Starbucks", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("KFC", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("Subway", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("Taco Bell", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("Burger King", CompanyType.Resturants, 100));
+        sponsors.Add(new Sponsor("Pizza hut", CompanyType.Resturants, 100));
+
+        sponsors.Add(new Sponsor("UPS", CompanyType.Logistics, 100));
+        sponsors.Add(new Sponsor("Fed Ex", CompanyType.Logistics, 100));
+        sponsors.Add(new Sponsor("DHL", CompanyType.Logistics, 100));
+
+        sponsors.Add(new Sponsor("Booking.com", CompanyType.Travling, 100));
+        sponsors.Add(new Sponsor("Airbnb", CompanyType.Travling, 100));
+        sponsors.Add(new Sponsor("Tripadvisor", CompanyType.Travling, 100));
+        sponsors.Add(new Sponsor("TUI", CompanyType.Travling, 100));
+
+        sponsors.Add(new Sponsor("Coca Cola", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Pepsi", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Nestle", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Lays", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Quaker", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Doritor", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Hersays", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Hersays", CompanyType.Food, 100));
+        sponsors.Add(new Sponsor("Arla", CompanyType.Food, 100));
+
+        sponsors.Add(new Sponsor("Visa", CompanyType.Finance, 100));
+        sponsors.Add(new Sponsor("Mastercard", CompanyType.Finance, 100));
+        sponsors.Add(new Sponsor("Paypal", CompanyType.Finance, 100));
+
+
+
+
+
+        #endregion
     }
 }
 
