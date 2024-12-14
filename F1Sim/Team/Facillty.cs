@@ -21,9 +21,7 @@ namespace Facility
 
     public class ReseachNDevkiopnentFacility : Facility
     {
-        public double researchSpeedMultplier { get; set; }
         public int maxProjects { get; set; }
-
         public double costEffeincty { get; set; } //The lower the less price you pay
         public double qualityControll { get; set; } //the chance of failure
 
@@ -32,27 +30,25 @@ namespace Facility
         public ReseachNDevkiopnentFacility(int level) : base(level)
         {
             upkeep = upkeepOnLevel[level];
-            researchSpeedMultplier = reserachSpeedOnLevel[level];
             maxProjects = maxProjectsOnLevel[level];
             costEffeincty = costEffeinctyOnLevel[level];
             qualityControll = qualityControllONLevel[level];
+            enginners = new List<Enginner>();
         }
 
         public void UpgradeFaccilty()
         {
             upkeep = upkeepOnLevel[level];
-            researchSpeedMultplier = reserachSpeedOnLevel[level];
             maxProjects = maxProjectsOnLevel[level];
             costEffeincty = costEffeinctyOnLevel[level];
             qualityControll = qualityControllONLevel[level];
         }
 
-        static int[] upkeepOnLevel = new int[] { 50000, 75000, 90000, 110000, 130000 };
-        static double[] reserachSpeedOnLevel = new double[] { 1, 1.1, 1.2, 1.3, 1.6 };
+        static int[] upkeepOnLevel = new int[] { 50000, 75000, 90000, 110000, 130000 };       
         static int[] maxProjectsOnLevel = new int[] { 1, 2, 2, 3, 4 };
         static double[] costEffeinctyOnLevel = new double[] { 1, 1, 1, 0.9, 0.75 };
         static double[] qualityControllONLevel = new double[] { 0.3, 0.25, 0.2, 0.15, 0.1 };
-        static int[] enginnersOnLevel = new int[] { 3, 6, 9, 11, 13 };
+        public static int[] enginnersOnLevel = new int[] { 3, 6, 9, 11, 13 };
 
     }
     public class DriverFacility : Facility
@@ -64,6 +60,7 @@ namespace Facility
         {
             upkeep = upkeepOnLevel[level];
             simulatorQuality = simulatorQuailtyOnLevel[level];
+            affialiates = new List<Driver>();
         }
 
         public void Update()
@@ -74,7 +71,7 @@ namespace Facility
 
         static int[] upkeepOnLevel = new int[] { 30000, 40000, 50000, 60000, 70000 };
         static double[] simulatorQuailtyOnLevel = new double[] { 1, 1.05, 1.1, 1.15, 1.2 };
-        static int[] affialitesOnLevel = new int[] { 0, 1, 1, 2, 4 };
+        public static int[] affialitesOnLevel = new int[] { 0, 1, 1, 2, 4 };
     }
 
     public class PitCrewTranningFacility : Facility
@@ -88,6 +85,7 @@ namespace Facility
             upkeep = upkeepOnLevel[level];
             speedTrainer = speedTrainerOnLevel[level];
             faultTrainer = faultTrainerOnLevel[level];
+            pitcrews = new Pitcrew[14];
         }
 
         public void UpgradeFaccilty()
@@ -104,32 +102,23 @@ namespace Facility
 
     public class MarketingFacility : Facility
     {
-        public double fanEngagementBoost { get; set; }
-        public double sponsorshipAttractionBoost { get; set; }
-        public double mediaTranningBoost { get; set; }
+        public double sponsorshipAttractiom { get; set; }
         public List<Marketer> marketers { get; set; }
 
         public MarketingFacility(int level) : base(level)
         {
             upkeep = upkeepOnLevel[level];
-            fanEngagementBoost = fanEngagementBoostOnLevel[level];
-            sponsorshipAttractionBoost = sponsorshipAttractionBoostOnLevel[level];
-            mediaTranningBoost = mediaTranningBoostOnLevel[level];
+            marketers = new List<Marketer>();
         }
 
         public void UpgradeFaccilty()
         {
             upkeep = upkeepOnLevel[level];
-            fanEngagementBoost = fanEngagementBoostOnLevel[level];
-            sponsorshipAttractionBoost = sponsorshipAttractionBoostOnLevel[level];
-            mediaTranningBoost = mediaTranningBoostOnLevel[level];
+
         }
 
         static int[] upkeepOnLevel = new int[] { 40000, 45000, 50000, 75000, 100000 };
-        static double[] fanEngagementBoostOnLevel = new double[] { 1, 1.05, 1.1, 1.15, 1.2 };
-        static double[] sponsorshipAttractionBoostOnLevel = new double[] { 1, 1.05, 1.1, 1.15, 1.2 };
-        static double[] mediaTranningBoostOnLevel = new double[] { 1, 1.05, 1.1, 1.15, 1.2 };
-        static int[] marketrsOnLevel = new int[] { 2, 3, 4, 5, 6 };
+        public static int[] marketrsOnLevel = new int[] { 2, 3, 4, 5, 6 };
     }
 
     public class WindTunnel : Facility

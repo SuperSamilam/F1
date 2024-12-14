@@ -195,7 +195,7 @@ namespace PersonSpace
         {
             //Devlopmentspeed + creatvity
 
-            rating = (int)((devlopmentSpeed + creativty) / (double)2);
+            rating = (int)(((devlopmentSpeed + creativty) / (double)2)*100);
             if (staffExperince == StaffExperince.Junior)
                 rating -= 2;
             if (staffExperince == StaffExperince.Senior)
@@ -272,7 +272,7 @@ namespace PersonSpace
         {
             //Devlopmentspeed + creatvity
 
-            rating = (int)((tireChangeSpeed / 3 + wingChangeSpeed / 6 + (1 - faultChance)) / (double)3);
+            rating = (int)(((tireChangeSpeed / 3 + wingChangeSpeed / 6 + (1 - faultChance)) / (double)3)*100);
             if (staffExperince == StaffExperince.Junior)
                 rating -= 2;
             if (staffExperince == StaffExperince.Senior)
@@ -347,7 +347,7 @@ namespace PersonSpace
 
         void CalcualteRating()
         {
-            rating = (int)((leadershipSkill + budgetingSkill + hiringSkill) / (double)3);
+            rating = (int)(((leadershipSkill + budgetingSkill + hiringSkill) / (double)3)*100);
             if (staffExperince == StaffExperince.Junior)
                 rating -= 2;
             if (staffExperince == StaffExperince.Senior)
@@ -421,7 +421,7 @@ namespace PersonSpace
 
         void CalcualteRating()
         {
-            rating = (int)((sponsorshipNegotioationSkill + fanEngagementSkill + mediaTranningSkill) / (double)3);
+            rating = (int)(((sponsorshipNegotioationSkill + fanEngagementSkill + mediaTranningSkill) / (double)3)*100);
             if (staffExperince == StaffExperince.Junior)
                 rating -= 2;
             if (staffExperince == StaffExperince.Senior)

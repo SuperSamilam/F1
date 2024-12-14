@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using TeamSpace;
 
 namespace SponsorSpace
 {
@@ -6,15 +7,17 @@ namespace SponsorSpace
     {
         public string companyName { get; set; }
         public CompanyType companyType { get; set; }
-        public int revenue { get; set; } //In tenthounands
 
-        public Sponsor(string companyName, CompanyType type, int revenue)
+        public Team teamSponsored {get; set;}
+
+        public Sponsor(string companyName, CompanyType companyType)
         {
             this.companyName = companyName;
             this.companyType = companyType;
-            this.revenue = revenue;
         }
+
     }
 
     public enum CompanyType { Retail, OilNGas, Clothes, Mobile, ComputerParts, VideoGames, VideoFilm, SocialMedia, Computers, Toys, Planes, Resturants, Logistics, Travling, Food, Finance }
 }
+

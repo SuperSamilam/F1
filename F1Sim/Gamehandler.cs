@@ -1,4 +1,5 @@
 using InputHelperSpace;
+using TeamSpace;
 
 public class GameHandler
 {
@@ -23,6 +24,7 @@ public class GameHandler
 
             Console.WriteLine("1: Look at world");
             Console.WriteLine("2: Driver market");
+            Console.WriteLine("3: Look at teams");
 
             Console.WriteLine("6: TOGGLE AUTOSAVE " + data.autosave);
 
@@ -34,6 +36,10 @@ public class GameHandler
             else if (input == "2")
             {
                 DriverMarket();
+            }
+            else if (input == "3")
+            {
+                LookAtTeams();
             }
             else if (input == "6")
             {
@@ -84,6 +90,20 @@ public class GameHandler
             Console.WriteLine(i + ": " + data.drivers[i].name + " Rating: " + data.drivers[i].rating + " Devlopment: " + data.drivers[i].devlopment + " Nationality: " + data.drivers[i].nationality);
         }
 
+        InputHelper.WaitForInputThenContinue();
+    }
+
+    void LookAtTeams()
+    {
+        for (int i = 0; i < data.teams.Count; i++)
+        {
+            Team team = data.teams[i];
+            Console.WriteLine(team.name);
+            Console.WriteLine("Team Principal " + team.teamPrincipal.name + " Rating: " + team.teamPrincipal.rating + " Nationailty: " + team.teamPrincipal.nationality);
+            Console.WriteLine("Driver 1 " + team.driver1.name + " Rating: " + team.driver1.rating + " Nationailty: " + team.driver1.nationality);
+            Console.WriteLine("Driver 2 " + team.driver2.name + " Rating: " + team.driver2.rating + " Nationailty: " + team.driver2.nationality);
+            Console.WriteLine();
+        }
         InputHelper.WaitForInputThenContinue();
     }
 }

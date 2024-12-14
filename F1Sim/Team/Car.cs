@@ -35,18 +35,19 @@ namespace CarSpace
             avarage = (topSpeed + acceleration + drsEffectovness + dirtyAirTolerance + engineColling + tyrePreservation) / 6;
         }
 
-        public Car CreateNewCar(double partsAvarages)
+        public static Car CreateNewCar(double partsAvarages)
         {
             Random rand = new Random();
             double min = Math.Max(0, partsAvarages-0.1);
             double max = Math.Max(0, partsAvarages-0.1);
 
-            topSpeed = min + (rand.NextDouble() * (max - min));
-            acceleration = min + (rand.NextDouble() * (max - min));
-            drsEffectovness = min + (rand.NextDouble() * (max - min));
-            downforce = min + (rand.NextDouble() * (max - min));
-            engineColling = min + (rand.NextDouble() * (max - min));
-            tyrePreservation = min + (rand.NextDouble() * (max - min));
+            double topSpeed = min + (rand.NextDouble() * (max - min));
+            double acceleration = min + (rand.NextDouble() * (max - min));
+            double drsEffectovness = min + (rand.NextDouble() * (max - min));
+            double downforce = min + (rand.NextDouble() * (max - min));
+            double dirtyAirTolerance = min + (rand.NextDouble() * (max - min));
+            double engineColling = min + (rand.NextDouble() * (max - min));
+            double tyrePreservation = min + (rand.NextDouble() * (max - min));
 
             Car car = new Car(topSpeed, acceleration, drsEffectovness, downforce, dirtyAirTolerance, engineColling, tyrePreservation);
             return car;

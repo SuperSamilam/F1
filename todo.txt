@@ -1,9 +1,22 @@
-Facciltys
-Sponsors
-Marketer(Person) - varibels ideas, crisis management
-Media tranning
-Merch
-Mechanics - Fix the cars broken parts, 
-Car - rear wing durabilty, front wing durabilty, sidepos durabilty, suspension durabilty, floor durabilyy
+Sponsors for each team
 
-Fråga micke när han tycker en klass är onödig? (Logisticsfaccilty)
+Simulate season but your not the manager
+    At the start choose tracks to race At   
+    Let each team change sponsors if their contract allows it
+    
+    Before each race
+    Create new car part
+    Repair car
+    Train pit crew/manage rest
+    Look at potential new drivers/affiliets
+    Look at potential enginners
+    Look at potential marketers
+    Look at potential pit personel
+    Upgrade facciltys??
+
+    Simulate the race
+
+    After each season
+    IDK
+
+    
