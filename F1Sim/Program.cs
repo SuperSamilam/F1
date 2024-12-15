@@ -1,8 +1,12 @@
-﻿using SaveSystemSpace;
+﻿using DataSpace;
 using InputHelperSpace;
+using SaveSystemSpace;
 
-GameData data = null;
-GameHandler gamehandler;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 
 
 //Allow for save files to be saved at one persitant place
@@ -10,8 +14,9 @@ if (!Directory.Exists(SaveSystem.gamePath))
 {
     Directory.CreateDirectory(SaveSystem.gamePath);
 }
-AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
 
+GameManager manager = new GameManager();
+DataPersistanceManager dataPersistanceManager = new DataPersistanceManager();
 
 //Main Menu
 while (true)
@@ -27,54 +32,38 @@ while (true)
 
     string input = Console.ReadLine() ?? "";
 
-    //How stop loop?
-    if (input == "1") //Play
+    if (input == "1")
     {
-        //Make check file exist first
         if (SaveSystem.DoesFileExist("latestSave.txt"))
         {
-            data = SaveSystem.loadData("latestSave.txt");
-            gamehandler = new GameHandler(data);
+            dataPersistanceManager.LoadGame("latestSave.txt");
         }
         else
         {
-            Console.Clear();
-            Console.WriteLine("No save data found");
-            InputHelper.CleanUp();
+            Console.WriteLine("No Save file found");
+            InputHelper.WaitForInputThenContinue();
         }
     }
-    else if (input == "2") //Load
+    else if (input == "2")
     {
-        data = SaveSystem.SelectAndLoadData();
-        if (data != null)
-            gamehandler = new GameHandler(data);
+        input = SaveSystem.SelectAndLoadData();
+        if (input != "")
+            dataPersistanceManager.LoadGame(input);
     }
-    else if (input == "3") //New Game
+    else if (input == "3")
     {
-        data = SaveSystem.NewSave();
-        gamehandler = new GameHandler(data);
+        input = SaveSystem.NewSave();
+        dataPersistanceManager.NewGame(input);
     }
-    else if (input == "4") //Quit
+    else if (input == "4")
     {
         break;
     }
-    else if (input == "5") //Buy DLC
+    else if (input == "5")
     {
-        Console.Clear();
-        Console.WriteLine("This dlc is not realsed, it will relase with the next programing project");
+        Console.WriteLine("This DLC is not realsed yet, (realse date next programing project)");
         InputHelper.WaitForInputThenContinue();
     }
 
-
 }
 
-void OnProcessExit(object? sender, EventArgs e)
-{
-    Console.WriteLine("IN HERE");
-    if (data != null)
-        if (data.autosave)
-        {
-            SaveSystem.WriteData(data);
-            Console.WriteLine("WROTE");
-        }
-}

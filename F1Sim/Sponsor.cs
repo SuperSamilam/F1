@@ -1,55 +1,29 @@
-using System.Security.Cryptography;
-using TeamSpace;
-
-namespace SponsorSpace
+public class Sponsor
 {
-    public class Sponsor
+    public string companyName {get; set;}
+    public CompanyType compnayType {get; set;}
+    public double popularity {get; set;}
+    public int payout {get; set;}
+    public int teamSponsored {get; set;}
+
+    public Sponsor(string companyName, CompanyType compnayType)
     {
-        public string companyName { get; set; }
-        public CompanyType companyType { get; set; }
-        public double popularity { get; set; }
+        this.companyName = companyName;
+        this.compnayType = compnayType;
 
-        public int paying { get; set; } //The amount they pay each month
-
-        public Team teamSponsored { get; set; }
-
-        public Sponsor(string companyName, CompanyType companyType)
-        {
-            this.companyName = companyName;
-            this.companyType = companyType;
-            popularity = new Random().NextDouble();
-        }
-
-        public int GenerateOffer(double teamPopularity, bool isWC)
-        {
-            //max offer is 31 million min is 7 million
-
-            int basePay = (int)Math.Clamp(10000000, 20000000, (20000000 * teamPopularity));
-
-            if (isWC)
-                basePay += (int)(5000000 * teamPopularity);
-
-            double popularityDiff = teamPopularity - popularity;
-
-            //The sponsor is more popular
-            if (popularityDiff < 0)
-                basePay -= (int)(3000000 * -popularityDiff);
-            else
-            {
-                popularityDiff++; //Makes a zero popDiff to 1 meanign x*popDiff = x, if popdiff was already 1 it gets a 2x boost
-                basePay += (int)(3000000 * popularityDiff);
-            }
-
-
-            return basePay;
-        }
-
-
-
+        Random rand = new Random();
+        popularity = rand.NextDouble();
+        payout = 0;
+        teamSponsored = -1;
     }
-
-    public enum CompanyType { Retail, OilNGas, Clothes, Mobile, ComputerParts, VideoGames, VideoFilm, SocialMedia, Computers, Toys, Planes, Resturants, Logistics, Travling, Food, Finance }
 }
 
-//If signined with unpopular sponsor you will lose popularty
-//if signed with popular sposnor you will gain populatrity
+public enum CompanyType { Retail, OilNGas, Clothes, Mobile, ComputerParts, VideoGames, VideoFilm, SocialMedia, Computers, Toys, Planes, Resturants, Logistics, Travling, Food, Finance };
+
+//Sponsor logic
+//They pay a sum to sponsor
+//They can partner with a higher popularity team and they will pay more, but the team will lose poularity
+//They can partner with a lower popularity team and they will pay less, but the team will gain popularity
+
+//Ideas
+//Sponors can have favorite teams that increase the money they give and reduce the populary loss or increace to populary gain, as well they dont want to sponors the rival teams

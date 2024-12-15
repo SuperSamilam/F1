@@ -1,22 +1,23 @@
-Sponsors for each team
+Classes to do
+    Country
+    Track
+    Season
+    Race
+    SeasonManager
+    PeopleManager
+    Person
+        Driver
+        Staff
+            TeamPrincipal
+            Pitter
+            Enginner
+            Marketer
+    TeamManager
+    Team
+    Car
+    Faccilty
+        RNDFaccilty
+        DriverFaccilty
+        PitterFaccilty
+        MarketingFaccilty
 
-Simulate season but your not the manager
-    At the start choose tracks to race At   
-    Let each team change sponsors if their contract allows it
-    
-    Before each race
-    Create new car part
-    Repair car
-    Train pit crew/manage rest
-    Look at potential new drivers/affiliets
-    Look at potential enginners
-    Look at potential marketers
-    Look at potential pit personel
-    Upgrade facciltys??
-
-    Simulate the race
-
-    After each season
-    IDK
-
-    

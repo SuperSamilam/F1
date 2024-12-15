@@ -1,5 +1,5 @@
-using InputHelperSpace;
 using System.Text.Json;
+using InputHelperSpace;
 
 namespace SaveSystemSpace
 {
@@ -8,7 +8,7 @@ namespace SaveSystemSpace
     {
         public static string gamePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "F1Game");
 
-        public static GameData NewSave()
+        public static string NewSave()
         {
             Console.Clear();
 
@@ -19,18 +19,16 @@ namespace SaveSystemSpace
             else
                 name = Path.Combine(gamePath, name + ".txt");
 
-            GameData data = new GameData(name);
-            WriteData(data);
             Thread.Sleep(200);
             Console.Clear();
-            return data;
+            return name;
         }
 
         public static void WriteData(GameData data)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(gamePath, data.saveName)))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(gamePath, data.SaveName)))
                 {
                     var opt = new JsonSerializerOptions() { WriteIndented = true };
                     string strJson = JsonSerializer.Serialize<GameData>(data, opt);
@@ -49,7 +47,7 @@ namespace SaveSystemSpace
             }
         }
 
-        public static GameData? SelectAndLoadData()
+        public static string SelectAndLoadData()
         {
             while (true)
             {
@@ -65,7 +63,7 @@ namespace SaveSystemSpace
                 string input = Console.ReadLine() ?? "";
 
                 if (input == "1")
-                    return null;
+                    return "";
 
                 int? result = InputHelper.ConvertStringToIntWithinRange(input, 2, files.Length + 2);
                 if (result == null)
@@ -73,7 +71,7 @@ namespace SaveSystemSpace
 
                 //Got a valid number
                 Console.Clear();
-                return loadData(Path.GetFileName(files[(int)result - 2]));
+                return Path.GetFileName(files[(int)result - 2]);
             }
         }
 
@@ -86,15 +84,11 @@ namespace SaveSystemSpace
             return false;
         }
 
-        public static GameData loadData(string saveName)
+        public static GameData? loadData(string saveName)
         {
-            GameData data = null;
-            
+            GameData? data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(gamePath + "/" + saveName));
 
-
-
-            // GameData data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(gamePath + "/" + saveName));
-            // return data;
+            return data;
         }
     }
 }
