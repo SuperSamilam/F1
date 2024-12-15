@@ -6,6 +6,7 @@ using System.Dynamic;
 using System.Security.Cryptography.X509Certificates;
 using CountrySpace;
 using System.Text.Json;
+using SponsorSpace;
 
 namespace TeamSpace
 {
@@ -29,6 +30,8 @@ namespace TeamSpace
         public MarketingFacility marketingFacility { get; set; }
         public WindTunnel windTunnel { get; set; }
 
+        public List<Sponsor> sponsors { get; set; } //max 4
+
         //Sponsors
         public double popularity { get; set; }
 
@@ -51,7 +54,7 @@ namespace TeamSpace
 
         public static Team MakeNewTeam(string name, int money, double popularity, StaffExperince experince, (int a, int b) driver1Rating, (int a, int b) driver2Rating, double carAvarage, int faciltyLevel, List<Country> countries)
         {
-
+            Random rand = new Random();
             //Hire a TeamPrincipal
             TeamPrincipal tp = TeamPrincipal.CreateNewTeamPrincipal(experince, countries);
 
@@ -87,11 +90,13 @@ namespace TeamSpace
                 marketingFacility.marketers.Add(Marketer.CreateNewTeamMarketer(experince, countries));
             }
 
-
             //windtunnel
             WindTunnel windTunnel = new WindTunnel(faciltyLevel);
 
+
             Team team = new Team(name, money, popularity, tp, driver1, driver2, car, reseachNDevkiopnentFacility, driverFacility, pitCrewTranningFacility, marketingFacility, windTunnel);
+
+
             return team;
         }
     }
