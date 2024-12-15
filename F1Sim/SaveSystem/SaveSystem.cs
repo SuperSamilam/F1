@@ -88,8 +88,13 @@ namespace SaveSystemSpace
 
         public static GameData loadData(string saveName)
         {
-            GameData data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(gamePath + "/" + saveName));
-            return data;
+            GameData data = null;
+            
+
+
+
+            // GameData data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(gamePath + "/" + saveName));
+            // return data;
         }
     }
 }

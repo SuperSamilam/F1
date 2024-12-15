@@ -385,16 +385,16 @@ public class GameData
 
 
         Console.WriteLine(countries.Count);
-        Team mclaren = Team.MakeNewTeam("Mclaren", 20000000, 0.92, StaffExperince.Junior, (86, 91), (82, 87), 0.173, 0, countries, Sponsors); //20 million
-        Team ferari = Team.MakeNewTeam("Ferari", 30000000, 0.8, StaffExperince.Junior, (86, 91), (85, 90), 0.157, 0, countries, Sponsors); //30 million
-        Team redBull = Team.MakeNewTeam("RedBull", 22000000, 0.89, StaffExperince.Junior, (90, 95), (78, 83), 0.2, 0, countries, Sponsors); //22 million
-        Team mercedes = Team.MakeNewTeam("Mercedes", 27000000, 0.82, StaffExperince.Junior, (85, 90), (84, 89), 0.145, 0, countries, Sponsors); //27 million
-        Team asonMartin = Team.MakeNewTeam("Aston Martin", 14000000, 0.6, StaffExperince.Junior, (83, 88), (74, 79), 0.081, 0, countries, Sponsors); //14 million
-        Team alpine = Team.MakeNewTeam("Alpine", 14000000, 0.73, StaffExperince.Junior, (81, 86), (80, 85), 0.055, 0, countries, Sponsors); //14 million
-        Team haas = Team.MakeNewTeam("Haas", 7000000, 0.54, StaffExperince.Junior, (78, 83), (76, 81), 0.075, 0, countries, Sponsors); //7 million
-        Team rb = Team.MakeNewTeam("Alpha Tauri", 10000000, 0.63, StaffExperince.Junior, (77, 82), (76, 81), 0.072, 0, countries, Sponsors); //10 million
-        Team williams = Team.MakeNewTeam("Williams", 6000000, 0.67, StaffExperince.Junior, (79, 84), (68, 73), 0.046, 0, countries, Sponsors); //6 million
-        Team kick = Team.MakeNewTeam("Kick Sauber", 9000000, 0.57, StaffExperince.Junior, (77, 82), (73, 78), 0.02, 0, countries, Sponsors); //9 million
+        Team mclaren = Team.MakeNewTeam("Mclaren", 20000000, 0.92, StaffExperince.Junior, (86, 91), (82, 87), 0.173, 0, countries); //20 million
+        Team ferari = Team.MakeNewTeam("Ferari", 30000000, 0.8, StaffExperince.Junior, (86, 91), (85, 90), 0.157, 0, countries); //30 million
+        Team redBull = Team.MakeNewTeam("RedBull", 22000000, 0.89, StaffExperince.Junior, (90, 95), (78, 83), 0.2, 0, countries); //22 million
+        Team mercedes = Team.MakeNewTeam("Mercedes", 27000000, 0.82, StaffExperince.Junior, (85, 90), (84, 89), 0.145, 0, countries); //27 million
+        Team asonMartin = Team.MakeNewTeam("Aston Martin", 14000000, 0.6, StaffExperince.Junior, (83, 88), (74, 79), 0.081, 0, countries); //14 million
+        Team alpine = Team.MakeNewTeam("Alpine", 14000000, 0.73, StaffExperince.Junior, (81, 86), (80, 85), 0.055, 0, countries); //14 million
+        Team haas = Team.MakeNewTeam("Haas", 7000000, 0.54, StaffExperince.Junior, (78, 83), (76, 81), 0.075, 0, countries); //7 million
+        Team rb = Team.MakeNewTeam("Alpha Tauri", 10000000, 0.63, StaffExperince.Junior, (77, 82), (76, 81), 0.072, 0, countries); //10 million
+        Team williams = Team.MakeNewTeam("Williams", 6000000, 0.67, StaffExperince.Junior, (79, 84), (68, 73), 0.046, 0, countries); //6 million
+        Team kick = Team.MakeNewTeam("Kick Sauber", 9000000, 0.57, StaffExperince.Junior, (77, 82), (73, 78), 0.02, 0, countries); //9 million
 
         teams = new List<Team>();
         teams.Add(mclaren);
