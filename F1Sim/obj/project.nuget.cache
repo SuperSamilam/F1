@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1yhRUmTfSpE=",
+  "dgSpecHash": "na/Nyi6nuJY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sam.lindfors\\Documents\\GitHub\\FormulaManager\\F1\\F1Sim\\F1Sim.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\lindf\\OneDrive\\Skrivbord\\Prog\\F1\\F1Sim\\F1Sim.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lindf\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.11\\microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\lindf\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.11\\microsoft.windowsdesktop.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\lindf\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.11\\microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\lindf\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.11\\microsoft.netcore.app.host.win-x64.8.0.11.nupkg.sha512"
+  ],
   "logs": []
 }

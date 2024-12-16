@@ -6,7 +6,7 @@ namespace SponsorSpace
         public CompanyType compnayType { get; set; }
         public double popularity { get; set; }
         public int payout { get; set; }
-        public int teamSponsored { get; set; }
+        public string teamSponsored { get; set; }
 
         public Sponsor(string companyName, CompanyType compnayType)
         {
@@ -16,10 +16,25 @@ namespace SponsorSpace
             Random rand = new Random();
             popularity = rand.NextDouble();
             payout = 0;
-            teamSponsored = -1;
+            teamSponsored = "";
         }
     }
 
+    public struct SponsorOffer
+    {
+        public int sponsor;
+        public int money;
+        public double sponsorPopularity;
+        public double popularityDiff;
+
+        public SponsorOffer(int sponor, int money, double sponsorPopularity, double popularityDiff)
+        {
+            this.sponsor = sponor;
+            this.money = money;
+            this.sponsorPopularity = sponsorPopularity;
+            this.popularityDiff = popularityDiff;
+        }
+    }
     public enum CompanyType { Retail, OilNGas, Clothes, Mobile, ComputerParts, VideoGames, VideoFilm, SocialMedia, Computers, Toys, Planes, Resturants, Logistics, Travling, Food, Finance };
 }
 

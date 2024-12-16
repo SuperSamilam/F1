@@ -13,13 +13,13 @@ namespace SponsorManagerSpace
             InterfaceFinder.dataPersistanceRegistry.Add(this);
         }
 
-        public List<int> GetSponsorOffersForTeam(double teamPopularity, bool isWC, List<int> existingSponsors)
+        public List<SponsorOffer> GetSponsorOffersForTeam(double teamPopularity, int teamSeed, bool isWC, List<int> existingSponsors)
         {
             if (existingSponsors.Count >= 4)
                 throw new ArgumentException("Max sponsors is 4 per team this should never execute");
 
-            List<int> sponsorOffers = new List<int>();
-
+            List<SponsorOffer> sponsorOffers = new List<SponsorOffer>();
+            Random rand = new Random(teamSeed);
             //editing sponsor data directly because as long as i dont edit teamsponored they are not bound to anything
             for (int i = 0; i < sponsors.Count; i++)
             {
@@ -32,33 +32,35 @@ namespace SponsorManagerSpace
                         continue;
 
 
-                    int basePay = (int)Math.Clamp(10000000, 20000000, (20000000 * teamPopularity));
+                    //Base pay 1-3 million a month
+                    int basePay = rand.Next(20000000, 25000000);
 
                     //is WC stands for world constructor, it refers to the team who won the world construct championship/best car
+                    //200k extra if wcc
                     if (isWC)
-                        basePay += (int)(5000000 * teamPopularity);
+                        basePay += (int)(200000 * teamPopularity);
 
                     double popularityDiff = teamPopularity - sponsors[i].popularity;
 
                     if (popularityDiff < 0)
-                        basePay -= (int)(3000000 * -popularityDiff);
+                        basePay -= (int)(5000000 * -popularityDiff);
                     else
                     {
-                        popularityDiff++;
-                        basePay += (int)(3000000 * popularityDiff);
+                        basePay += (int)(1000000 * (popularityDiff+1));
                     }
 
-                    sponsors[i].payout = basePay;
-                    sponsorOffers.Add(i);
+                    SponsorOffer sponsorOffer = new SponsorOffer(i, basePay, sponsors[i].popularity, popularityDiff);
+                    sponsorOffers.Add(sponsorOffer);
 
                 }
             }
             return sponsorOffers;
         }
 
-        public void SignSponsor(int team, int sponsor)
+        public void SignSponsor(string team, int sponsor, int money)
         {
             sponsors[sponsor].teamSponsored = team;
+            sponsors[sponsor].payout = money;
         }
 
         public void loadData(GameData data)

@@ -5,9 +5,9 @@ namespace SeasonManagerSpace;
 
 public class SeasonManager : DataPersistance
 {
-    List<Country> countries = new List<Country>();
+    static List<Country> countries = new List<Country>();
 
-    public string GetRandomNationaltiy()
+    public static string GetRandomNationaltiy()
     {
         Random rand = new Random();
         return countries[rand.Next(0, countries.Count)].name;
