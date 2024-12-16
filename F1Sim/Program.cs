@@ -30,7 +30,9 @@ while (true)
     Console.WriteLine("");
     Console.WriteLine("5: Buy Engine Maker DLC");
 
+    
     string input = Console.ReadLine() ?? "";
+
 
     if (input == "1")
     {

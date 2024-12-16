@@ -1,17 +1,18 @@
 Classes to do
-    Country
-    Track
-    Season
-    Race
-    SeasonManager
+    ✔️Country
+    ✔️Track
+    ➖Season
+    ➖Race
+    ➖SeasonManager
     PeopleManager
-    Person
-        Driver
-        Staff
-            TeamPrincipal
-            Pitter
-            Enginner
-            Marketer
+    ✔️Person
+        ✔️Driver
+        ✔️Staff
+            ✔️TeamPrincipal
+            ✔️Pitter
+            ✔️Enginner
+            ✔️Marketer
+            ✔️Scout
     TeamManager
     Team
     Car

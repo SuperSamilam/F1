@@ -1,20 +1,23 @@
+using SponsorSpace;
+using CountrySpace;
+using StaffSpace;
+using DriverSpace;
+using TeamSpace;
 
 public class GameData
 {
     public string SaveName { get; set; }
-
     public List<Sponsor> sponsors { get; set; }
-    //List of teams
-    //List of drivers
+    public List<Country> countries { get; set; }
 
-    //Drivers Market list 
+    public List<Driver> drivers { get; set; }
+    public List<TeamPrincipal> teamPrincipals { get; set; }
+    public List<Enginner> enginners { get; set; }
+    public List<Pitter> pitters { get; set; }
+    public List<Marketer> marketers { get; set; }
+    public List<Scout> scouts { get; set; }
 
-    //List of all drivers stats though all times
-    //List of all teams stats though all times
-
-    //List of enginner market
-    //List of pit crew market
-
+    public List<Team> teams {get; set;}
 
 
     public GameData(string saveName)
@@ -110,6 +113,14 @@ public class GameData
 
         };
 
+
+        drivers = new List<Driver>();
+        teamPrincipals = new List<TeamPrincipal>();
+        enginners = new List<Enginner>();
+        pitters = new List<Pitter>();
+        marketers = new List<Marketer>();
+        scouts = new List<Scout>();
+        teams = new List<Team>();
     }
 }
 
