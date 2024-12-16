@@ -14,7 +14,19 @@ namespace TeamManagerSpace
 
         public void loadData(GameData data)
         {
-            teams = data.teams;
+            if (teams.Count == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Team team = Team.CreateTeeamWithoutName(this);
+                    if (team != null)
+                        teams.Add(team);
+                }
+            }
+            else
+            {
+                teams = data.teams;
+            }
         }
 
         public void saveData(GameData data)

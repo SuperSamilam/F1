@@ -86,6 +86,7 @@ namespace SaveSystemSpace
 
         public static GameData? loadData(string saveName)
         {
+            Console.WriteLine(gamePath + "/" + saveName);
             GameData? data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(gamePath + "/" + saveName));
 
             return data;

@@ -143,12 +143,33 @@ namespace TeamSpace
             return new Team(name);
         }
 
-        public static Team CreateTeeamWithoutName()
+        public static Team CreateTeeamWithoutName(TeamManager teamManager)
         {
             Random rand = new Random();
-            string[] names = File.ReadAllLines(@"carbrands.txt");
-            string name = names[rand.Next(0, names.Length)];
-            return new Team(name);
+
+            int trys = 3;
+
+            for (int i = 0; i < trys; i++)
+            {
+                string[] names = File.ReadAllLines(@"carbrands.txt");
+                string name = names[rand.Next(0, names.Length)];
+
+                bool valid = true;
+                for (int j = 0; j < teamManager.teams.Count; j++)
+                {
+                    if (name == teamManager.teams[j].name)
+                    {
+                        valid = false;
+                        continue;
+                    }
+                }
+
+                if (valid)
+                    return new Team(name);
+
+            }
+
+            return null;
         }
     }
 }

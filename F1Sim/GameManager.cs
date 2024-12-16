@@ -14,4 +14,6 @@ public class GameManager
         teamManager = new TeamManager();
         peopleManager = new PeopleManager();
     }
+
+    
 }

@@ -10,6 +10,7 @@ public class DataPersistanceManager
         data = new GameData(name);
         
         SaveSystem.WriteData(data);
+        // LoadGame(name);
     }
 
     public void LoadGame(string name)

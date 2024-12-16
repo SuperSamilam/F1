@@ -113,7 +113,6 @@ public class GameData
 
         };
 
-
         drivers = new List<Driver>();
         teamPrincipals = new List<TeamPrincipal>();
         enginners = new List<Enginner>();
@@ -121,6 +120,8 @@ public class GameData
         marketers = new List<Marketer>();
         scouts = new List<Scout>();
         teams = new List<Team>();
+
+        
     }
 }
 

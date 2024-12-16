@@ -19,7 +19,6 @@ namespace PeopleManagerSpace
         public PeopleManager()
         {
             InterfaceFinder.dataPersistanceRegistry.Add(this);
-            FixPitterMarket();
         }
 
         public void ShowTeamPrincipalMarket(List<ScoutData> scouted, TeamManager teamManager)
