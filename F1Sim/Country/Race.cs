@@ -35,35 +35,65 @@ namespace RaceSpace
             }
 
             //Qualifying
+            raceInfos.Sort((s1, s2) => s1.car.avarage.CompareTo(s2.car.avarage));
+
             for (int i = 0; i < raceInfos.Count; i++)
             {
-                while (raceInfos[i].lapTime < trackLenght)
+                Console.WriteLine(raceInfos[i].driver.name + " " + teamManager.teams[raceInfos[i].driver.team].name);
+                raceInfos[i].position = i;
+            }
+            Console.WriteLine();
+
+            //During 1 race 100 actions can happend
+            for (int i = 0; i < 100; i++)
+            {
+                int driverEvent = rand.Next(0, raceInfos.Count);
+                if (raceInfos[driverEvent].position == 1000)
+                    continue;
+
+                if (driverEvent != 0)
                 {
-                    if (track.track[raceInfos[i].trackPart].isCurve)
+                    //Try to overtake
+                    if (raceInfos[driverEvent - 1].position + 1 == raceInfos[driverEvent].position)
                     {
-                        double downforceCurveAccelerator = Math.Clamp(raceInfos[i].car.downforce * 2, 0.5, 2);
-                        double cornerSkill = Math.Clamp(raceInfos[i].driver.cornerSkill * 2, 0.5, 2);
-                        raceInfos[i].lapTime += (downforceCurveAccelerator + cornerSkill) * (0.7 + (rand.NextDouble() * 0.3));
+                        double overTakeChance = raceInfos[driverEvent].driver.overtake / (raceInfos[driverEvent].driver.defense + 1);
+                        if (rand.NextDouble() < overTakeChance)
+                        {
+                            int tempPos = raceInfos[driverEvent].position;
+                            raceInfos[driverEvent].position = raceInfos[driverEvent - 1].position;
+                            raceInfos[driverEvent - 1].position = tempPos;
+
+                            RaceInfo info = raceInfos[driverEvent];
+                            raceInfos[driverEvent] = raceInfos[driverEvent - 1];
+                            raceInfos[driverEvent - 1] = info;
+                        }
+                        else
+                        {
+                            //overtake failed
+                            double chanceOfCrash = Math.Clamp((1 - raceInfos[driverEvent].driver.awerness) / 3.45, 0.03, 0.3);
+                            if (rand.NextDouble() < chanceOfCrash)
+                            {
+                                //overtaker crhases
+                                raceInfos[driverEvent].position = 1000;
+                                raceInfos.Sort((s1, s2) => s1.position.CompareTo(s2.position));
+                            }
+                        }
                     }
                     else
                     {
-                        double straightSpeed = raceInfos[i].car.acceleration * 70 + raceInfos[i].car.drsEffectovness * 20 + raceInfos[i].car.dirtyAirTolerance * 90;
-                        raceInfos[i].lapTime += straightSpeed; //Awerness makes them a bit more carefull
+                        raceInfos[driverEvent].position--;
                     }
-
-                    if (track.track[raceInfos[i].trackPart].sectionEnd < raceInfos[i].lapTime)
-                    {
-                        raceInfos[i].trackPart++;
-                    }
-                    raceInfos[i].itteration++;
+                }
+                else
+                {
+                    raceInfos[driverEvent].position--;
                 }
             }
 
-            raceInfos.Sort((s1, s2) => s1.itteration.CompareTo(s2.itteration));
-
             for (int i = 0; i < raceInfos.Count; i++)
             {
-                Console.WriteLine(raceInfos[i].driver.name + " " + teamManager.teams[raceInfos[i].driver.team].name + " " + raceInfos[i].itteration);
+                Console.WriteLine(raceInfos[i].driver.name + " " + teamManager.teams[raceInfos[i].driver.team].name + " " + raceInfos[i].position);
+                raceInfos[i].position = i;
             }
 
 
@@ -76,26 +106,13 @@ namespace RaceSpace
         public Driver driver;
         public Car car;
         public int position;
-        public double interval;
-        public int trackPart;
 
-        public int itteration;
-        public double lapTime;
-        public int lap;
-
-        public double tireWere;
 
         public RaceInfo(Driver driver, Car car)
         {
             this.driver = driver;
             this.car = car;
             position = 1;
-            interval = 0;
-            trackPart = 0;
-            tireWere = 0;
-            lap = 0;
-            lapTime = 0;
-            itteration = 0;
         }
 
     }
