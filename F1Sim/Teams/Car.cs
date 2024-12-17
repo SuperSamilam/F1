@@ -4,7 +4,6 @@ namespace CarSpace
     {
         public double avarage;
 
-        public double topSpeed { get; set; }
         public double acceleration { get; set; }
         public double drsEffectovness { get; set; }
         public double downforce { get; set; }
@@ -18,9 +17,8 @@ namespace CarSpace
         public double gearboxDurabilty;
         public double electricalStorage;
 
-        public Car(double topSpeed, double acceleration, double drsEffectovness, double downforce, double dirtyAirTolerance, double engineColling, double tyrePreservation)
+        public Car(double acceleration, double drsEffectovness, double downforce, double dirtyAirTolerance, double engineColling, double tyrePreservation)
         {
-            this.topSpeed = topSpeed;
             this.acceleration = acceleration;
             this.drsEffectovness = drsEffectovness;
             this.downforce = downforce;
@@ -32,7 +30,7 @@ namespace CarSpace
             gearboxDurabilty = 0;
             electricalStorage = 0;
 
-            avarage = (topSpeed + acceleration + drsEffectovness + dirtyAirTolerance + engineColling + tyrePreservation) / 6;
+            avarage = (acceleration + drsEffectovness + dirtyAirTolerance + engineColling + tyrePreservation) / 5;
         }
 
         public static Car CreateNewCar(double partsAvarages)
@@ -41,7 +39,6 @@ namespace CarSpace
             double min = Math.Max(0, partsAvarages-0.1);
             double max = Math.Max(0, partsAvarages-0.1);
 
-            double topSpeed = min + (rand.NextDouble() * (max - min));
             double acceleration = min + (rand.NextDouble() * (max - min));
             double drsEffectovness = min + (rand.NextDouble() * (max - min));
             double downforce = min + (rand.NextDouble() * (max - min));
@@ -49,7 +46,7 @@ namespace CarSpace
             double engineColling = min + (rand.NextDouble() * (max - min));
             double tyrePreservation = min + (rand.NextDouble() * (max - min));
 
-            Car car = new Car(topSpeed, acceleration, drsEffectovness, downforce, dirtyAirTolerance, engineColling, tyrePreservation);
+            Car car = new Car(acceleration, drsEffectovness, downforce, dirtyAirTolerance, engineColling, tyrePreservation);
             return car;
         }
     }

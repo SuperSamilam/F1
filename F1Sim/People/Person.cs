@@ -13,6 +13,7 @@ namespace PersonSpace
         public int rating { get; set; }
         public double development { get; set; }
         public int team {get; set;}
+        public string teamName{get; set;}
         public int contractEndYear {get; set;}
 
         public Person(int age, string nationailty, int ageOfretirement, int salary, double teamCompatibilty, double development)
@@ -31,6 +32,7 @@ namespace PersonSpace
 
             contractEndYear = -1;
             team = -1;
+            teamName = "";
         }
     }
 }

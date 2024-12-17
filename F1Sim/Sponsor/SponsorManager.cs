@@ -7,10 +7,11 @@ namespace SponsorManagerSpace
     public class SponsorManager : DataPersistance
     {
         List<Sponsor> sponsors;
-
-        public SponsorManager()
+        GameManager manager;
+        public SponsorManager(GameManager manager)
         {
             InterfaceFinder.dataPersistanceRegistry.Add(this);
+            this.manager = manager;
         }
 
         public List<SponsorOffer> GetSponsorOffersForTeam(double teamPopularity, int teamSeed, bool isWC, List<int> existingSponsors)

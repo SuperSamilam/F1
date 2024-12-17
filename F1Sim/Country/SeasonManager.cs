@@ -5,9 +5,17 @@ namespace SeasonManagerSpace;
 
 public class SeasonManager : DataPersistance
 {
-    static List<Country> countries = new List<Country>();
+    public List<Country> countries { get; set; }
 
-    public static string GetRandomNationaltiy()
+    GameManager manager;
+
+    public SeasonManager(GameManager manager)
+    {
+        InterfaceFinder.dataPersistanceRegistry.Add(this);
+        this.manager = manager;
+    }
+
+    public string GetRandomNationaltiy()
     {
         Random rand = new Random();
         return countries[rand.Next(0, countries.Count)].name;

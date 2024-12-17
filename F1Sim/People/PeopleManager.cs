@@ -16,9 +16,12 @@ namespace PeopleManagerSpace
         public List<Marketer> marketers = new List<Marketer>();
         public List<Scout> scouts = new List<Scout>();
 
-        public PeopleManager()
+        GameManager manager;
+
+        public PeopleManager(GameManager manager)
         {
             InterfaceFinder.dataPersistanceRegistry.Add(this);
+            this.manager = manager;
         }
 
         public void ShowTeamPrincipalMarket(List<ScoutData> scouted, TeamManager teamManager)
@@ -307,6 +310,15 @@ namespace PeopleManagerSpace
         }
 
 
+        public void FixMarkets()
+        {
+            FixPitterMarket();
+            FixEnginnerMarket();
+            FixMarketerMarket();
+            FixScoutMarket();
+            FixDriverMarket();
+            FixTeamPricnipalMarket();
+        }
         public void FixPitterMarket()
         {
             //Make sure there is at least 20 unemplloyed pitters
@@ -323,7 +335,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 20 - pittersUnemployed; i++)
                 {
-                    pitters.Add(Pitter.CreateNewPitcrew(StaffExperince.Junior, SeasonManager.GetRandomNationaltiy()));
+                    pitters.Add(Pitter.CreateNewPitcrew(StaffExperince.Junior, manager.GetRandomNationatly()));
                 }
             }
         }
@@ -343,7 +355,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 10 - enginnerUnemployed; i++)
                 {
-                    enginners.Add(Enginner.CreateNewEnginner(StaffExperince.Junior, SeasonManager.GetRandomNationaltiy()));
+                    enginners.Add(Enginner.CreateNewEnginner(StaffExperince.Junior, manager.GetRandomNationatly()));
                 }
             }
         }
@@ -363,7 +375,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 10 - marketerUnemployed; i++)
                 {
-                    marketers.Add(Marketer.CreateNewTeamMarketer(StaffExperince.Junior, SeasonManager.GetRandomNationaltiy()));
+                    marketers.Add(Marketer.CreateNewTeamMarketer(StaffExperince.Junior, manager.GetRandomNationatly()));
                 }
             }
         }
@@ -383,7 +395,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 10 - scoutUnemployed; i++)
                 {
-                    scouts.Add(Scout.CreateNewScout(StaffExperince.Junior, SeasonManager.GetRandomNationaltiy()));
+                    scouts.Add(Scout.CreateNewScout(StaffExperince.Junior, manager.GetRandomNationatly()));
                 }
             }
         }
@@ -403,7 +415,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 10 - driverUnemployed; i++)
                 {
-                    drivers.Add(Driver.CreateNewDriver(65, 75, SeasonManager.GetRandomNationaltiy()));
+                    drivers.Add(Driver.CreateNewDriver(65, 75, manager.GetRandomNationatly()));
                 }
             }
         }
@@ -423,7 +435,7 @@ namespace PeopleManagerSpace
             {
                 for (int i = 0; i < 5 - tpUnemployed; i++)
                 {
-                    teamPrincipals.Add(TeamPrincipal.CreateNewTeamPrincipal(StaffExperince.Junior, SeasonManager.GetRandomNationaltiy()));
+                    teamPrincipals.Add(TeamPrincipal.CreateNewTeamPrincipal(StaffExperince.Junior, manager.GetRandomNationatly()));
                 }
             }
         }

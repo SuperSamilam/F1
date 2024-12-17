@@ -5,6 +5,7 @@ using PeopleManagerSpace;
 using SponsorManagerSpace;
 using SponsorSpace;
 using StaffSpace;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using TeamManagerSpace;
 
@@ -105,6 +106,7 @@ namespace TeamSpace
             for (int i = 0; i < toHire.Count; i++)
             {
                 peopleManager.pitters[toHire[i]].team = placementLastYear - 1;
+                peopleManager.pitters[toHire[i]].teamName = name;
             }
         }
 
@@ -115,6 +117,7 @@ namespace TeamSpace
             for (int i = 0; i < toHire.Count; i++)
             {
                 peopleManager.enginners[toHire[i]].team = placementLastYear - 1;
+                peopleManager.enginners[toHire[i]].teamName = name;
             }
         }
 
@@ -125,6 +128,7 @@ namespace TeamSpace
             for (int i = 0; i < toHire.Count; i++)
             {
                 peopleManager.scouts[toHire[i]].team = placementLastYear - 1;
+                peopleManager.scouts[toHire[i]].teamName = name;
             }
         }
 
@@ -135,6 +139,30 @@ namespace TeamSpace
             for (int i = 0; i < toHire.Count; i++)
             {
                 peopleManager.marketers[toHire[i]].team = placementLastYear - 1;
+                peopleManager.marketers[toHire[i]].teamName = name;
+            }
+        }
+
+        public void HireDrivers(PeopleManager peopleManager, int year)
+        {
+            List<int> toHire = peopleManager.GetUnemployedDrivers(2);
+            driver1 = toHire[0];
+            driver2 = toHire[1];
+            for (int i = 0; i < toHire.Count; i++)
+            {
+                peopleManager.drivers[toHire[i]].team = placementLastYear - 1;
+                peopleManager.drivers[toHire[i]].contractEndYear = year+1;
+                peopleManager.drivers[toHire[i]].teamName = name;
+            }
+        }
+        public void HireTP(PeopleManager peopleManager)
+        {
+            List<int> toHire = peopleManager.GetUnemployedTeampricnipals(1);
+            teamPrincipal = toHire[0];
+            for (int i = 0; i < toHire.Count; i++)
+            {
+                peopleManager.teamPrincipals[toHire[i]].team = placementLastYear - 1;
+                peopleManager.teamPrincipals[toHire[i]].teamName = name;
             }
         }
 

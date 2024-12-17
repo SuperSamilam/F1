@@ -32,12 +32,13 @@ namespace FacciltySpace
         public double windTunnelDataAccuracy { get; set; }
         public int allowedHoursLeft { get; set; }
 
-        public RNDFaccilty()
+        public RNDFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
             maxProjects = maxProjectsOnLevel[level];
             costEfficenty = costEfficentyOnLevel[level];
             qualityControll = qualityControllOnLevel[level];
+            enginners = new List<int>();
         }
 
         public void Upgrade()
@@ -64,10 +65,11 @@ namespace FacciltySpace
         public List<int> affiliets { get; set; }
         public double simulatorQuality { get; set; }
 
-        public DriverFaccilty()
+        public DriverFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
             simulatorQuality = simulatorQualtyOnLevel[level];
+            affiliets = new List<int>();
         }
 
         public void Upgrade()
@@ -89,11 +91,12 @@ namespace FacciltySpace
         public double speedTrainBoost { get; set; }
         public double faultTrainBoost { get; set; }
 
-        public PitterFacilty()
+        public PitterFacilty() : base()
         {
             upkeep = upkeepOnLevel[level];
             speedTrainBoost = speedTrainBoostOnLevel[level];
             faultTrainBoost = faultTrainBoostOnLevel[level];
+            pitters = new List<int>();
         }
 
         public void Upgrade()
@@ -115,10 +118,11 @@ namespace FacciltySpace
         public List<int> marketers { get; set; }
         public double sponsorshipAttractiom { get; set; } //WHAT IS THIS ONE SUPPOSED TO DO
 
-        public MarketingFaccilty()
+        public MarketingFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
             sponsorshipAttractiom = sponsorShipAttractionOnLevel[level];
+            marketers = new List<int>();
         }
 
         public void Upgrade()
@@ -134,15 +138,16 @@ namespace FacciltySpace
         public static double[] sponsorShipAttractionOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
     }
 
-    public class ScoutingFaccilty : Faccilty
+    public class ScoutingFaccilty : Faccilty 
     {
         public List<int> scouts { get; set; }
         public int maxScouting { get; set; }
 
-        public ScoutingFaccilty()
+        public ScoutingFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
             maxScouting = maxProjectsOnLevel[level];
+            scouts = new List<int>();
         }
 
         public void Upgrade()
