@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Drawing;
 using CarSpace;
 using DriverSpace;
 using PeopleManagerSpace;
@@ -15,8 +14,7 @@ namespace RaceSpace
         public int trackIndex { get; set; }
 
         //Dictionary cause drivers might dnf or get fastet lap
-
-        public List<RaceResult> raceResults {get; set;}
+        public List<RaceResult> raceResults { get; set; }
 
         public Race(int county, int trackIndex)
         {
@@ -80,7 +78,6 @@ namespace RaceSpace
                     }
                     //Some drivers might have same position, but it dosent matter as order is in list
                     raceInfos.Sort((s1, s2) => s1.position.CompareTo(s2.position));
-
 
                     continue;
                 }

@@ -24,7 +24,7 @@ namespace DriverSpace
 
         public void CalcualteRating()
         {
-            double mean = (cornerSkill + defense + overtake + awerness + (reactionTime / 3)) / (double)5;
+            double mean = (cornerSkill + defense + overtake + awerness + reactionTime ) / (double)5;
             rating = (int)(100 * mean);
         }
 
@@ -80,7 +80,6 @@ namespace DriverSpace
             double overtake = minExpected + (rand.NextDouble() * (maxExpected - minExpected));
             double awerness = expexctedRating * 5 - reactionTime - cornerSkill - defense - overtake;
 
-            reactionTime = reactionTime * 3;
             Driver driver = new Driver(age, nationailty, ageOfRetirement, salary, teamCompatibilty, devlopment, reactionTime, cornerSkill, defense, overtake, awerness);
             driver.CalcualteRating();
             return driver;

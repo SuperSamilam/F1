@@ -64,5 +64,19 @@ namespace SeasonSpace
         }
     }
 
+    public class DevlopmentPlan
+    {
+        int doneInXRaces;
+        bool speedOrDownforce;
+        double experticeGain;
+
+        public DevlopmentPlan(int doneInXRaces, List<int> enginners, bool speedOrDownforce, double experticeGain)
+        {
+            this.doneInXRaces = doneInXRaces;
+            this.speedOrDownforce = speedOrDownforce;
+            this.experticeGain = experticeGain;
+        }
+    }
+
 
 }

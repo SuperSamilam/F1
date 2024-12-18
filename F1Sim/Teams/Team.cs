@@ -152,7 +152,44 @@ namespace TeamSpace
             for (int i = 0; i < 2; i++)
             {
                 int faccilty = rand.Next(0, 6);
-                
+                if (faccilty == 0)
+                {
+                    rNDFaccilty.Train(peopleManager);
+                }
+                else if (faccilty == 1)
+                {
+                    driverFaccilty.Train(peopleManager, driver1, driver2);
+                }
+                else if (faccilty == 2)
+                {
+                    pitterFacilty.Train(peopleManager);
+                }
+                else if (faccilty == 3)
+                {
+                    marketingFaccilty.Train(peopleManager);
+                }
+                else if (faccilty == 4)
+                {
+                    scoutingFaccilty.Train(peopleManager);
+                }
+            }
+        }
+
+        public void ScoutEverything(PeopleManager peopleManager)
+        {
+            HirePitCrew(peopleManager);
+            HireEnginner(peopleManager);
+            HireScouter(peopleManager);
+            HireMarketer(peopleManager);
+
+            //Hire affilietes if possible
+            if (driverFaccilty.affiliete1 == -1)
+            {
+                driverFaccilty.affiliete1 = HireAffilite(peopleManager);
+            }
+            if (driverFaccilty.affiliete2 == -1)
+            {
+                driverFaccilty.affiliete2 = HireAffilite(peopleManager);
             }
         }
 
@@ -222,6 +259,25 @@ namespace TeamSpace
                 peopleManager.teamPrincipals[toHire[i]].team = placementLastYear - 1;
                 peopleManager.teamPrincipals[toHire[i]].teamName = name;
             }
+        }
+
+        public int HireAffilite(PeopleManager peopleManager)
+        {
+            List<int> toHire = peopleManager.GetUnemployedDrivers(10000);
+            List<int> validDrivers = new List<int>();
+            for (int i = 0; i < toHire.Count; i++)
+            {
+                if (peopleManager.drivers[toHire[i]].rating <= 75)
+                {
+                    validDrivers.Add(toHire[i]);
+                }
+            }
+            toHire = validDrivers.OrderByDescending(person => peopleManager.drivers[person].development).ToList();
+
+            Driver driverToHire = peopleManager.drivers[toHire[0]];
+            driverToHire.team = placementLastYear;
+            driverToHire.teamName = name;
+            return toHire[0];
         }
 
         public static Team CreateTeeamWithName(string name)

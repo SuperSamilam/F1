@@ -39,9 +39,20 @@ public class GameManager : DataPersistance
                     //Upgrade faccilty
                     teamManager.teams[t].TryUpgradeFaccilty(peopleManager);
                     //Train 2 facciltys emplooyes
-                    
+                    teamManager.teams[t].TrainRandomFacciltys(peopleManager);
+                    teamManager.teams[t].ScoutEverything(peopleManager);
+
                     //Scout
+                    //if missing any enginner, marketer, scout, or pitters HIRE, 30% chance of replacing any of theese roles if they find a better one then their worse
+                    //If drivers contact goes out this year, find another driver to hire
+                    //always try to have 1 affilitate
+                    //depending on popularity try maxing affiliete count
+                    
                     //Devlop new parts
+                    //can max use 5 hours per projects, calcualte cost ect look if it is in budget.
+                    //if it is and have projects spaces over calculate it
+
+                    
 
                 }
 

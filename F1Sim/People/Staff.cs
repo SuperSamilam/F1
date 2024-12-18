@@ -178,7 +178,7 @@ namespace StaffSpace
         public static Enginner CreateNewEnginner(StaffExperince staffExperince, string nationality)
         {
             Random rand = new Random();
-            double creativty = rand.NextDouble(); //Just luck
+            double creativty = 0.3 + rand.NextDouble() * 0.7; //Just luck
             int ageOfRetirement = 60;
 
             //Depending on staffexernxe
@@ -306,11 +306,9 @@ namespace StaffSpace
 
     public class Scout : Staff
     {
-        public double scoutSpeed { get; set; }
         public double scoutSkill { get; set; }
-        public Scout(int age, string nationailty, int ageOfretirement, int salary, double teamCompatibilty, double development, StaffExperince staffExperince, double scoutSpeed, double scoutSkill) : base(age, nationailty, ageOfretirement, salary, teamCompatibilty, development, staffExperince)
+        public Scout(int age, string nationailty, int ageOfretirement, int salary, double teamCompatibilty, double development, StaffExperince staffExperince, double scoutSkill) : base(age, nationailty, ageOfretirement, salary, teamCompatibilty, development, staffExperince)
         {
-            this.scoutSpeed = scoutSpeed;
             this.scoutSkill = scoutSkill;
         }
 
@@ -354,14 +352,14 @@ namespace StaffSpace
                 scoutSkill = 0.6 + (rand.NextDouble() * (0.75 - 0.6));
             }
 
-            Scout scout = new Scout(age, nationality, ageOfRetirement, salary, 0.5, devlopment, staffExperince, scoutSpeed, scoutSkill);
+            Scout scout = new Scout(age, nationality, ageOfRetirement, salary, 0.5, devlopment, staffExperince, scoutSkill);
             scout.CalcualteRating();
             return scout;
         }
 
         void CalcualteRating()
         {
-            rating = (int)(((scoutSpeed + scoutSkill) / (double)2) * 100);
+            rating = (int)(scoutSkill * 100);
             if (rating > 88)
             {
                 staffExperince = StaffExperince.Senior;

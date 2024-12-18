@@ -1,5 +1,9 @@
+using System.IO.Compression;
+using System.Security.AccessControl;
+using CarSpace;
 using DriverSpace;
 using PeopleManagerSpace;
+using SeasonSpace;
 using StaffSpace;
 
 namespace FacciltySpace
@@ -17,27 +21,26 @@ namespace FacciltySpace
             running = true;
             condition = 1;
         }
+
+        public void Upgrade()
+        {
+            level++;
+        }
+
+        public static double[] tranningBoostOnLevel = new double[] { 1.003, 1.006, 1.009, 1.012, 1.015 };
     }
 
     public class RNDFaccilty : Faccilty
     {
         public List<int> enginners { get; set; }
-        public int maxProjects { get; set; }
-        public double costEfficenty { get; set; } //How much money do they need to spend to fix projects
         public double qualityControll { get; set; } //Chance of faileure
 
-        //Wind tunnel explination
-        //In F1 the engines are all pretty simlar, the big facotrs that make cars faster then eachother is the aerodynamics, all teams are allowed x hours in an wind tunnel to test their aerodynamics, the lower down in the wcc you are more time you get
-        //During an F1 season their are multple "periods". For theese periods they get new wind tunnel hours to allowed devlopment for their cards during the season. Theese hours can also be used for other types of upgrades, such as planning new car parts for the next seaoson
-        //Normaly thats not nessecary, but it happends. In 2026 their is a big regulation update witch will require theese types of devlopment to be able to stay ahead, but normaly consttcutrs start to focus on their next car around augsust even though the seaosn ends december
-        public double windTunnelDataAccuracy { get; set; }
-        public int allowedHoursLeft { get; set; }
+        DevlopmentPlan devlopmentPlan {get; set;}
+
 
         public RNDFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
-            maxProjects = maxProjectsOnLevel[level];
-            costEfficenty = costEfficentyOnLevel[level];
             qualityControll = qualityControllOnLevel[level];
             enginners = new List<int>();
         }
@@ -46,44 +49,81 @@ namespace FacciltySpace
         {
             level++;
             upkeep = upkeepOnLevel[level];
-            maxProjects = maxProjectsOnLevel[level];
-            costEfficenty = costEfficentyOnLevel[level];
             qualityControll = qualityControllOnLevel[level];
         }
+
+        public void Train(PeopleManager peopleManager)
+        {
+            for (int i = 0; i < enginners.Count; i++)
+            {
+                peopleManager.enginners[enginners[i]].devlopmentSpeed *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp((0.98 + (peopleManager.enginners[enginners[i]].development * (1.01 - 0.98))), 1, 1.1);
+            }
+        }
+
+
 
         public static int[] upgradeCost = new int[] { 500000, 800000, 1000000, 2000000, 5000000 }; //cheepest 500k most expenisve 5million
         public static int[] upkeepOnLevel = new int[] { 50000, 75000, 90000, 110000, 130000 };
         public static int[] maxEmplooyesOnLevel = new int[] { 2, 4, 6, 8, 12 };
-        public static int[] maxProjectsOnLevel = new int[] { 1, 2, 3, 4, 5 };
-        public static double[] costEfficentyOnLevel = new double[] { 1, 0.99, 0.98, 0.96, 0.935 };
         public static double[] qualityControllOnLevel = new double[] { 0.3, 0.28, 0.23, 0.15, 0.1 };
-        public static double[] windTunnelDataAcurracyOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
 
     }
 
     public class DriverFaccilty : Faccilty
     {
-        public List<int> affiliets { get; set; }
-        public double simulatorQuality { get; set; }
+        public int affiliete1 { get; set; }
+        public int affiliete2 { get; set; }
 
         public DriverFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
-            simulatorQuality = simulatorQualtyOnLevel[level];
-            affiliets = new List<int>();
+            affiliete1 = -1;
+            affiliete2 = -1;
         }
 
         public void Upgrade()
         {
             level++;
             upkeep = upkeepOnLevel[level];
-            simulatorQuality = simulatorQualtyOnLevel[level];
+        }
+
+        public void Train(PeopleManager peopleManager, int driver1, int driver2)
+        {
+
+            if (affiliete1 != -1)
+            {
+                peopleManager.drivers[affiliete1].reactionTime *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete1].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete1].cornerSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete1].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete1].defense *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete1].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete1].overtake *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete1].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete1].awerness *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete1].development * (1.01 - 0.98)), 1, 1.1);
+            }
+
+            if (affiliete2 != -1)
+            {
+                peopleManager.drivers[affiliete2].reactionTime *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete2].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete2].cornerSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete2].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete2].defense *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete2].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete2].overtake *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete2].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.drivers[affiliete2].awerness *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[affiliete2].development * (1.01 - 0.98)), 1, 1.1);
+            }
+
+            peopleManager.drivers[driver1].reactionTime *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver1].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver1].cornerSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver1].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver1].defense *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver1].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver1].overtake *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver1].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver1].awerness *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver1].development * (1.01 - 0.98)), 1, 1.1);
+
+            peopleManager.drivers[driver2].reactionTime *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver2].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver2].cornerSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver2].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver2].defense *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver2].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver2].overtake *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver2].development * (1.01 - 0.98)), 1, 1.1);
+            peopleManager.drivers[driver2].awerness *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.drivers[driver2].development * (1.01 - 0.98)), 1, 1.1);
+
         }
 
         public static int[] upgradeCost = new int[] { 400000, 700000, 1000000, 1500000, 2800000 }; //cheepest 400k most expenisve 2.8million
         public static int[] upkeepOnLevel = new int[] { 30000, 40000, 50000, 60000, 70000 };
-        public static int[] maxEmplooyesOnLevel = new int[] { 0, 1, 2, 3, 5 };
-        public static double[] simulatorQualtyOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
     }
 
     public class PitterFacilty : Faccilty
@@ -95,8 +135,6 @@ namespace FacciltySpace
         public PitterFacilty() : base()
         {
             upkeep = upkeepOnLevel[level];
-            speedTrainBoost = speedTrainBoostOnLevel[level];
-            faultTrainBoost = faultTrainBoostOnLevel[level];
             pitters = new List<int>();
         }
 
@@ -104,8 +142,15 @@ namespace FacciltySpace
         {
             level++;
             upkeep = upkeepOnLevel[level];
-            speedTrainBoost = speedTrainBoostOnLevel[level];
-            faultTrainBoost = faultTrainBoostOnLevel[level];
+        }
+
+        public void Train(PeopleManager peopleManager)
+        {
+            for (int i = 0; i < pitters.Count; i++)
+            {
+                peopleManager.pitters[pitters[i]].tireChangeSpeed *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.pitters[pitters[i]].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.pitters[pitters[i]].faultChance *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.pitters[pitters[i]].development * (1.01 - 0.98)), 1, 1.1);
+            }
         }
 
         public double GetPitStopTime(PeopleManager peopleManager)
@@ -133,19 +178,15 @@ namespace FacciltySpace
 
         public static int[] upgradeCost = new int[] { 400000, 700000, 1000000, 1500000, 2800000 }; //cheepest 400k most expenisve 2.8million
         public static int[] upkeepOnLevel = new int[] { 20000, 30000, 40000, 50000, 60000 };
-        public static double[] speedTrainBoostOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
-        public static double[] faultTrainBoostOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
     }
 
     public class MarketingFaccilty : Faccilty
     {
         public List<int> marketers { get; set; }
-        public double sponsorshipAttractiom { get; set; } //WHAT IS THIS ONE SUPPOSED TO DO
 
         public MarketingFaccilty() : base()
         {
             upkeep = upkeepOnLevel[level];
-            sponsorshipAttractiom = sponsorShipAttractionOnLevel[level];
             marketers = new List<int>();
         }
 
@@ -153,13 +194,20 @@ namespace FacciltySpace
         {
             level++;
             upkeep = upkeepOnLevel[level];
-            sponsorshipAttractiom = sponsorShipAttractionOnLevel[level];
+        }
+
+        public void Train(PeopleManager peopleManager)
+        {
+            for (int i = 0; i < marketers.Count; i++)
+            {
+                peopleManager.marketers[marketers[i]].fanEngagementSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.marketers[marketers[i]].development * (1.01 - 0.98)), 1, 1.1);
+                peopleManager.marketers[marketers[i]].sponsorshipNegotioationSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.marketers[marketers[i]].development * (1.01 - 0.98)), 1, 1.1);
+            }
         }
 
         public static int[] upgradeCost = new int[] { 400000, 700000, 1000000, 1500000, 2800000 }; //cheepest 400k most expenisve 2.8million
         public static int[] upkeepOnLevel = new int[] { 20000, 30000, 40000, 50000, 650000 };
         public static int[] maxEmplooyesOnLevel = new int[] { 2, 3, 4, 5, 6 };
-        public static double[] sponsorShipAttractionOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
     }
 
     public class ScoutingFaccilty : Faccilty
@@ -179,6 +227,14 @@ namespace FacciltySpace
             level++;
             upkeep = upkeepOnLevel[level];
             maxScouting = maxProjectsOnLevel[level];
+        }
+
+        public void Train(PeopleManager peopleManager)
+        {
+            for (int i = 0; i < scouts.Count; i++)
+            {
+                peopleManager.scouts[scouts[i]].scoutSkill *= Faccilty.tranningBoostOnLevel[level] * Math.Clamp(0.98 + (peopleManager.scouts[scouts[i]].development * (1.01 - 0.98)), 1, 1.1);
+            }
         }
 
         public static int[] upgradeCost = new int[] { 400000, 700000, 1000000, 1500000, 2800000 }; //cheepest 400k most expenisve 2.8million

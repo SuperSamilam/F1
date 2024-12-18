@@ -248,8 +248,7 @@ namespace PeopleManagerSpace
                         if (scouted[j].scoutLevel >= 2)
                         {
                             Console.WriteLine(
-                            "Devlopment Rate: " + scouts[i].development +
-                            " Fan Engagement: " + scouts[i].scoutSpeed
+                            "Devlopment Rate: " + scouts[i].development
                             );
                         }
                         if (scouted[j].scoutLevel == 3)
