@@ -2,6 +2,7 @@ using DataSpace;
 using PeopleManagerSpace;
 using RaceSpace;
 using SeasonManagerSpace;
+using SeasonSpace;
 using SponsorManagerSpace;
 using TeamManagerSpace;
 using TeamSpace;
@@ -13,7 +14,7 @@ public class GameManager : DataPersistance
     public PeopleManager peopleManager;
     public SeasonManager seasonManager;
 
-    int year = 2024; 
+    int year = 2024;
     public GameManager()
     {
         sponsorManager = new SponsorManager(this);
@@ -22,6 +23,38 @@ public class GameManager : DataPersistance
         seasonManager = new SeasonManager(this);
 
         InterfaceFinder.dataPersistanceRegistry.Add(this);
+    }
+
+    void SimulateSeasons(int seasons)
+    {
+        for (int i = 0; i < seasons; i++)
+        {
+            //Generate Season Scedule
+            seasonManager.GenerateSeason(year);
+
+            for (int j = 0; j < seasonManager.season.races.Count; i++)
+            {
+                for (int t = 0; t < teamManager.teams.Count; t++)
+                {
+                    //Upgrade faccilty
+                    teamManager.teams[t].TryUpgradeFaccilty(peopleManager);
+                    //Train 2 facciltys emplooyes
+                    
+                    //Scout
+                    //Devlop new parts
+
+                }
+
+                //Race wekkend
+
+                //maybe get sponsor money
+            }
+        }
+    }
+
+    void AdvanceSeason()
+    {
+        year++;
     }
 
     public string GetRandomNationatly()
@@ -39,8 +72,8 @@ public class GameManager : DataPersistance
             {
                 Team team = Team.CreateTeeamWithoutName(teamManager);
                 if (team != null)
-                {   
-                    team.placementLastYear = teamManager.teams.Count+1;
+                {
+                    team.placementLastYear = teamManager.teams.Count + 1;
                     team.HireEnginner(peopleManager);
                     team.HireMarketer(peopleManager);
                     team.HirePitCrew(peopleManager);
@@ -53,15 +86,13 @@ public class GameManager : DataPersistance
                 }
             }
             //
-            Race race = new Race();
-            race.country = 5;
-            race.trackIndex = 0;
+            Race race = new Race(5, 0);
             race.SimulateWeekend(peopleManager, seasonManager, teamManager);
         }
     }
 
     public void saveData(GameData data)
     {
-        
+
     }
 }

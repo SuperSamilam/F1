@@ -1,4 +1,5 @@
 using DriverSpace;
+using PeopleManagerSpace;
 using StaffSpace;
 
 namespace FacciltySpace
@@ -107,6 +108,29 @@ namespace FacciltySpace
             faultTrainBoost = faultTrainBoostOnLevel[level];
         }
 
+        public double GetPitStopTime(PeopleManager peopleManager)
+        {
+            Random rand = new Random();
+            double meanPitTime = 0;
+            double meanFaultChance = 0;
+
+            for (int i = 0; i < pitters.Count; i++)
+            {
+                meanPitTime += peopleManager.pitters[pitters[i]].tireChangeSpeed;
+                meanFaultChance += peopleManager.pitters[pitters[i]].faultChance;
+            }
+
+            meanPitTime /= pitters.Count;
+            meanFaultChance /= pitters.Count;
+
+            double pitTime = (meanPitTime - 0.1) + (rand.NextDouble() * meanPitTime);
+            if (rand.NextDouble() < meanFaultChance)
+            {
+                pitTime += 1.5;
+            }
+            return pitTime;
+        }
+
         public static int[] upgradeCost = new int[] { 400000, 700000, 1000000, 1500000, 2800000 }; //cheepest 400k most expenisve 2.8million
         public static int[] upkeepOnLevel = new int[] { 20000, 30000, 40000, 50000, 60000 };
         public static double[] speedTrainBoostOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
@@ -138,7 +162,7 @@ namespace FacciltySpace
         public static double[] sponsorShipAttractionOnLevel = new double[] { 1, 1.02, 1.05, 1.1, 1.3 };
     }
 
-    public class ScoutingFaccilty : Faccilty 
+    public class ScoutingFaccilty : Faccilty
     {
         public List<int> scouts { get; set; }
         public int maxScouting { get; set; }

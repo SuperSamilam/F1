@@ -105,8 +105,7 @@ namespace PeopleManagerSpace
                         if (scouted[j].scoutLevel == 3)
                         {
                             Console.WriteLine(
-                            "Wing Change: " + pitters[i].wingChangeSpeed +
-                            " Fault Chance: " + pitters[i].faultChance +
+                            "Fault Chance: " + pitters[i].faultChance +
                             " Rateing: " + pitters[i].rating
                             );
                         }

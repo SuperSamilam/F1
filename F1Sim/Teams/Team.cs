@@ -98,6 +98,64 @@ namespace TeamSpace
 
         }
 
+        public void TryUpgradeFaccilty(PeopleManager peopleManager)
+        {
+            //choose a random faccilty
+            Random rand = new Random();
+            int faccilty = rand.Next(0, 6);
+
+            if (faccilty == 0)
+            {
+                if (money - RNDFaccilty.upgradeCost[rNDFaccilty.level + 1] - RNDFaccilty.upkeepOnLevel[rNDFaccilty.level + 1] > 3000000)
+                {
+                    rNDFaccilty.Upgrade();
+                    HireEnginner(peopleManager);
+                }
+            }
+            else if (faccilty == 1)
+            {
+                if (money - DriverFaccilty.upgradeCost[driverFaccilty.level + 1] - DriverFaccilty.upkeepOnLevel[driverFaccilty.level + 1] > 3000000)
+                {
+                    driverFaccilty.Upgrade();
+                }
+            }
+            else if (faccilty == 3)
+            {
+                if (money - PitterFacilty.upgradeCost[pitterFacilty.level + 1] - PitterFacilty.upkeepOnLevel[pitterFacilty.level + 1] > 3000000)
+                {
+                    pitterFacilty.Upgrade();
+                }
+            }
+            else if (faccilty == 4)
+            {
+                if (money - MarketingFaccilty.upgradeCost[marketingFaccilty.level + 1] - MarketingFaccilty.upkeepOnLevel[marketingFaccilty.level + 1] > 3000000)
+                {
+                    marketingFaccilty.Upgrade();
+                    HireMarketer(peopleManager);
+                }
+            }
+            else if (faccilty == 5)
+            {
+                if (money - ScoutingFaccilty.upgradeCost[scoutingFaccilty.level + 1] - ScoutingFaccilty.upkeepOnLevel[scoutingFaccilty.level + 1] > 3000000)
+                {
+                    scoutingFaccilty.Upgrade();
+                    HireScouter(peopleManager);
+                }
+            }
+
+            //Check if they have enought money to upgrade it and how much money will be left
+        }
+
+        public void TrainRandomFacciltys(PeopleManager peopleManager)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < 2; i++)
+            {
+                int faccilty = rand.Next(0, 6);
+                
+            }
+        }
+
         public void HirePitCrew(PeopleManager peopleManager)
         {
             //Hire a new pitter
@@ -151,7 +209,7 @@ namespace TeamSpace
             for (int i = 0; i < toHire.Count; i++)
             {
                 peopleManager.drivers[toHire[i]].team = placementLastYear - 1;
-                peopleManager.drivers[toHire[i]].contractEndYear = year+1;
+                peopleManager.drivers[toHire[i]].contractEndYear = year + 1;
                 peopleManager.drivers[toHire[i]].teamName = name;
             }
         }

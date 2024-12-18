@@ -18,12 +18,10 @@ namespace StaffSpace
     public class Pitter : Staff
     {
         public double tireChangeSpeed { get; set; } //1-2.5
-        public double wingChangeSpeed { get; set; } //3-6
         public double faultChance { get; set; }
-        public Pitter(int age, string nationailty, int ageOfretirement, int salary, double teamCompatibilty, double development, StaffExperince staffExperince, double tireChangeSpeed, double wingChangeSpeed, double faultChance) : base(age, nationailty, ageOfretirement, salary, teamCompatibilty, development, staffExperince)
+        public Pitter(int age, string nationailty, int ageOfretirement, int salary, double teamCompatibilty, double development, StaffExperince staffExperince, double tireChangeSpeed, double faultChance) : base(age, nationailty, ageOfretirement, salary, teamCompatibilty, development, staffExperince)
         {
             this.tireChangeSpeed = tireChangeSpeed;
-            this.wingChangeSpeed = wingChangeSpeed;
             this.faultChance = faultChance;
         }
 
@@ -47,7 +45,6 @@ namespace StaffSpace
                 devlopment = 0.8 + (rand.NextDouble() * (0.9 - 0.8)); ;
 
                 tireChangeSpeed = 2.15 + (rand.NextDouble() * (2.5 - 2.15));
-                wingChangeSpeed = 5 + (rand.NextDouble() * (5 - 6));
                 faultChance = 0.2;
             }
             else if (staffExperince == StaffExperince.Mid)
@@ -55,9 +52,7 @@ namespace StaffSpace
                 age = rand.Next(25, 30);
                 salary = 40000;
                 devlopment = 0.75 + (rand.NextDouble() * (0.8 - 0.75));
-
                 tireChangeSpeed = 1.9 + (rand.NextDouble() * (2.2 - 1.9));
-                wingChangeSpeed = 4 + (rand.NextDouble() * (4 - 5));
                 faultChance = 0.1;
             }
             else
@@ -67,11 +62,10 @@ namespace StaffSpace
                 devlopment = 0.55 + (rand.NextDouble() * (0.7 - 0.55)); ;
 
                 tireChangeSpeed = 1.75 + (rand.NextDouble() * (2 - 1.75));
-                wingChangeSpeed = 3 + (rand.NextDouble() * (3 - 4));
                 faultChance = 0.04;
             }
 
-            Pitter pitcrew = new Pitter(age, nationality, ageOfRetirement, salary, 0.5, devlopment, staffExperince, tireChangeSpeed, wingChangeSpeed, faultChance);
+            Pitter pitcrew = new Pitter(age, nationality, ageOfRetirement, salary, 0.5, devlopment, staffExperince, tireChangeSpeed, faultChance);
             pitcrew.CalcualteRating();
             return pitcrew;
         }
@@ -79,7 +73,7 @@ namespace StaffSpace
         void CalcualteRating()
         {
             //Devlopmentspeed + creatvity
-            rating = (int)(((tireChangeSpeed / 3 + wingChangeSpeed / 6 + (1 - faultChance)) / (double)3) * 100);
+            rating = (int)(((tireChangeSpeed / 3 + (1 - faultChance)) / (double)2) * 100);
             if (rating > 88)
             {
                 staffExperince = StaffExperince.Senior;
